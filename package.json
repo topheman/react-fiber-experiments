@@ -1,6 +1,6 @@
 {
-  "name": "my-react-app-starter",
-  "version": "1.1.0",
+  "name": "react-suspense-experiments",
+  "version": "0.0.1",
   "private": true,
   "description": "create-react-app based project with a few pre-configured / installed features such as eslint or prettier",
   "keywords": [
@@ -13,10 +13,10 @@
   "author": "Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/topheman/my-react-app-starter.git"
+    "url": "https://github.com/topheman/react-suspense-experiments.git"
   },
   "bugs": {
-    "url": "https://github.com/topheman/my-react-app-starter/issues"
+    "url": "https://github.com/topheman/react-suspense-experiments/issues"
   },
   "license": "MIT",
   "dependencies": {
