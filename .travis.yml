@@ -1,0 +1,9 @@
+sudo: false
+language: node_js
+node_js:
+  - "8"
+install: npm install
+script:
+  - npm run lint
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run test:travis || npm run test:travis:pr'
+  - npm run build

@@ -1,0 +1,5 @@
+/build/**
+/coverage/**
+/docs/**
+/tmp/**
+/src/libs/**
