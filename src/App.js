@@ -3,7 +3,9 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    fetch("https://cdn2.thedogapi.com/images/BkE6Wg5E7_640.jpg");
+  }
   render() {
     return (
       <div className="App">
