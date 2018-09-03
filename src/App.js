@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to my-react-app-starter</h1>
+          <h1 className="App-title">Welcome to react-fiber-experiments</h1>
         </header>
         <p>
           An unejected create-react-app generated project with the following
@@ -40,9 +40,9 @@ class App extends Component {
         </p>
         <p style={{ marginTop: 40 }}>
           <a
-            href="https://github.com/topheman/my-react-app-starter"
+            href="https://github.com/topheman/react-fiber-experiments"
             className="App-button"
-            title="topheman/my-react-app-starte on github"
+            title="topheman/react-fiber-experiments on github"
           >
             fork me on github
           </a>
