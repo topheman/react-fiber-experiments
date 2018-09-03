@@ -40,7 +40,7 @@
     "generate-changelog": "./bin/generate-changelog.js",
     "pretty": "npx prettier --write '**/*.{js,jsx,json,css,scss}'",
     "precommit": "lint-staged && npm run lint && npm run test:precommit",
-    "serve": "npx serve --clipless --port 5000 build"
+    "serve": "npx serve --no-clipboard --listen 5000 build"
   },
   "devDependencies": {
     "commander": "^2.15.1",
