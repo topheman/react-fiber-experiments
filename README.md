@@ -1,6 +1,8 @@
 # react-fiber-experiments
 
-Based on [topheman/my-react-app-starter@1.1.0](https://github.com/topheman/my-react-app-starter).
+Based on [topheman/my-react-app-starter@1.1.0](https://github.com/topheman/my-react-app-starter) for the create-react-app boilerplate (eslint/prettier/others advanced setup).
+
+Based on [topheman/npm-registry-browser](https://github.com/topheman/npm-registry-browser) for the layouts/css/ui.
 
 **This remains an un-ejected create-react-app project, which means that you can:**
 
