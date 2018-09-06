@@ -11,7 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { compose, withStateHandlers } from "recompose";
 import classNames from "classnames";
 
-import { Link } from "./fake-react-router-dom";
+import { Link } from "@reach/router";
 
 import MainDrawer from "../components/MainDrawer";
 

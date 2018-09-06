@@ -13,7 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import WifiIcon from "@material-ui/icons/Wifi";
 import MuiDrawer from "@material-ui/core/Drawer";
 import classNames from "classnames";
-import { Link } from "./fake-react-router-dom";
+import { Link } from "@reach/router";
 
 import twitterIcon from "../assets/images/twitter-retina.png";
 import githubIcon from "../assets/images/github-retina.png";

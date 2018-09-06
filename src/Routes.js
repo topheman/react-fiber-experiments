@@ -1,15 +1,28 @@
 import React from "react";
-// TODO import router here
+import { Router } from "@reach/router";
 
 import MainLayout from "./components/MainLayout";
 
 // Containers that will be loaded by the router
-// TODO import containers here
+import HomeContainer from "./containers/HomeContainer";
+import RegularContainer from "./containers/RegularContainer";
+import RegularHomeContainer from "./containers/RegularHomeContainer";
+import RegularCoursesContainer from "./containers/RegularCoursesContainer";
 
-// TODO wrap MainLayout in a router and pass the containers as children with a path
+/**
+ * <MainLayout> is not wrapped by the Router
+ * -> no need for withRouter() on the direct descendante
+ * -> no withRouter() in @reach/router
+ */
 const Routes = () => (
   <MainLayout>
-    <p>This is only the begining ... No router for the moment.</p>
+    <Router>
+      <HomeContainer path="/" />
+      <RegularContainer path="regular">
+        <RegularHomeContainer path="/" />
+        <RegularCoursesContainer path="/course/:courseId" />
+      </RegularContainer>
+    </Router>
   </MainLayout>
 );
 
