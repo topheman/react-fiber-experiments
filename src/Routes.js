@@ -1,5 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
+import Loadable from "react-loadable";
 
 import MainLayout from "./components/MainLayout";
 
@@ -7,7 +8,16 @@ import MainLayout from "./components/MainLayout";
 import HomeContainer from "./containers/HomeContainer";
 import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
-import RegularCoursesContainer from "./containers/RegularCoursesContainer";
+
+// Lazy load - with specific delay
+const RegularCoursesContainer = Loadable({
+  loader: () =>
+    import("./containers/RegularCoursesContainer").then(script => {
+      const delay = 0; // todo retrieve from LocalStorage
+      return new Promise(resolve => setTimeout(() => resolve(script), delay));
+    }),
+  loading: () => <div>loading ...</div>
+});
 
 /**
  * <MainLayout> is not wrapped by the Router

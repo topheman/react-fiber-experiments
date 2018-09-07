@@ -6,4 +6,3 @@ package.json
 .prettierignore
 .gitignore
 *.fixtures.json
-src/libs/**

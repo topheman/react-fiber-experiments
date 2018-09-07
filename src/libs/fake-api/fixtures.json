@@ -1,0 +1,34 @@
+[
+  {
+    "id": "react",
+    "name": "React",
+    "lessons": [
+      "Introduction to jsx",
+      "Rendering elements",
+      "Components and props",
+      "State and lifecycle",
+      "Handling events",
+      "Do you really need redux ? 😜"
+    ]
+  },
+  {
+    "id": "nodejs",
+    "name": "NodeJS",
+    "lessons": ["Node repl", "Require a module", "Event loop - I/O", "npm"]
+  },
+  {
+    "id": "webpack",
+    "name": "Webpack",
+    "lessons": ["Why should you use it", "How to configure it", "The doc ..."]
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "lessons": [
+      "Why should you use it",
+      "Make a Dockerfile",
+      "Use docker-compose",
+      "Setup volumes"
+    ]
+  }
+]

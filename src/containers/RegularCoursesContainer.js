@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { makeFakeApi } from "../libs/fake-api/api";
+
 class RegularCoursesContainer extends Component {
   static propTypes = {
     // can't put .isRequired - Router seems to not only clone but also render Router children
@@ -11,7 +13,10 @@ class RegularCoursesContainer extends Component {
   static defaultProps = {
     courseId: undefined
   };
-  componentDidMount() {}
+  componentDidMount() {
+    makeFakeApi("slowNetwork")("/courses").then(res => console.log(res));
+    makeFakeApi("fastNetwork")("/course/nodejs").then(res => console.log(res));
+  }
   render() {
     const { courseId } = this.props;
     console.log({ courseId });
