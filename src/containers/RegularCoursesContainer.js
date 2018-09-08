@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { makeFakeApi } from "../libs/fake-api/api";
+import { fakeApi } from "../libs/fake-api/api";
 
 class RegularCoursesContainer extends Component {
   static propTypes = {
@@ -14,8 +14,14 @@ class RegularCoursesContainer extends Component {
     courseId: undefined
   };
   componentDidMount() {
-    makeFakeApi("slowNetwork")("/courses").then(res => console.log(res));
-    makeFakeApi("fastNetwork")("/course/nodejs").then(res => console.log(res));
+    fakeApi("/courses", "slowNetwork").then(res => console.log(res));
+    fakeApi("/course/nodejs", "fastNetwork").then(res => console.log(res));
+    fakeApi("/course/docker/nextLesson", "slowEndPoint")
+      .then(res => console.log(res))
+      .catch(err => console.warn(err));
+    fakeApi("/course/notfound", "fastNetwork")
+      .then(res => console.log(res))
+      .catch(err => console.warn(err));
   }
   render() {
     const { courseId } = this.props;

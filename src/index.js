@@ -6,7 +6,7 @@ import "./index.css";
 import RootContainer from "./containers/RootContainer";
 import registerServiceWorker from "./registerServiceWorker";
 
-import { buildDb as initFakeApi } from "./libs/fake-api/api";
+import { initFakeApi } from "./libs/fake-api/api";
 
 const theme = createMuiTheme({
   palette: {
