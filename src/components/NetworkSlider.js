@@ -1,0 +1,78 @@
+import React from "react";
+import PropTypes from "prop-types";
+import Slider from "@material-ui/lab/Slider";
+import { compose, withStateHandlers } from "recompose";
+import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+
+import { NetworkManager } from "../libs/fake-api";
+
+const styles = {
+  root: {},
+  slider: {
+    width: 200,
+    float: "left"
+  },
+  networkStatus: {
+    lineHeight: "2rem"
+  }
+};
+
+const NetworkSlider = ({
+  sliderValue,
+  updateSliderValue,
+  classes,
+  className,
+  ...remainingProps
+}) => (
+  <NetworkManager
+    render={({ getNetworkMode, setNetworkMode, listNetworkModes }) => {
+      const basisNetworkMode = getNetworkMode(); // on mount
+      const networkModes = listNetworkModes();
+      const currentIndex =
+        sliderValue || networkModes.indexOf(basisNetworkMode);
+      return (
+        <div
+          className={classNames(classes.root, className)}
+          {...remainingProps}
+        >
+          <Slider
+            className={classes.slider}
+            min={0}
+            max={networkModes.length - 1}
+            value={currentIndex}
+            step={1}
+            onChange={(e, value) => {
+              console.log(value, networkModes, networkModes[value]);
+              updateSliderValue(value);
+              setNetworkMode(networkModes[value]);
+            }}
+          />
+          <div className={classes.networkStatus}>
+            Network status: <strong>{networkModes[currentIndex]}</strong>
+          </div>
+        </div>
+      );
+    }}
+  />
+);
+NetworkSlider.propTypes = {
+  sliderValue: PropTypes.number,
+  updateSliderValue: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  className: PropTypes.string
+};
+NetworkSlider.defaultProps = {
+  sliderValue: undefined,
+  className: undefined
+};
+
+export default compose(
+  withStateHandlers(
+    { sliderValue: null },
+    {
+      updateSliderValue: () => value => ({ sliderValue: value })
+    }
+  ),
+  withStyles(styles)
+)(NetworkSlider);

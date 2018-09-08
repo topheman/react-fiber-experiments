@@ -145,7 +145,7 @@ export const fakeApi = (url, mode = getNetworkMode()) => {
         console.log(`️️️️️⬇️[FAKE ${delay}ms] ${url}`, response.ok);
       }
       if (!response.err) {
-        return resolve(response);
+        return resolve(response.ok);
       }
       return reject({ error: response.err });
     }, delay);

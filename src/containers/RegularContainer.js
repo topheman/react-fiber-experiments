@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
+import NetworkSlider from "../components/NetworkSlider";
+
 /**
  * This component is mounted by the router at `/regular`
  * It wrapps children described with `path` prop so they respond to router changes
@@ -26,6 +28,7 @@ const RegularContainer = ({ children, location }) => {
         <Link to="./">Regular loading section</Link>
         {relativeUrl && <span>{` > ${relativeUrl}`}</span>}
       </p>
+      <NetworkSlider />
       {children}
     </div>
   );

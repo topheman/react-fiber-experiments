@@ -6,7 +6,7 @@ import "./index.css";
 import RootContainer from "./containers/RootContainer";
 import registerServiceWorker from "./registerServiceWorker";
 
-import { initFakeApi } from "./libs/fake-api/api";
+import { initFakeApi } from "./libs/fake-api";
 
 const theme = createMuiTheme({
   palette: {
@@ -52,10 +52,10 @@ const render = Component => {
 
 // You may init any API service here
 
+initFakeApi();
+
 render(RootContainer);
 registerServiceWorker();
-
-initFakeApi();
 
 if (module.hot) {
   module.hot.accept("./containers/RootContainer", () => {
