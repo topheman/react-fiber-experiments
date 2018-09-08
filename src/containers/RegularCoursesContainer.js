@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import Button from "@material-ui/core/Button";
 
 import { fakeApi } from "../libs/fake-api";
+
+import CourseInfos from "../components/CourseInfos";
+import Spinner from "../components/Spinner";
 
 class RegularCoursesContainer extends Component {
   static propTypes = {
@@ -13,29 +17,97 @@ class RegularCoursesContainer extends Component {
   static defaultProps = {
     courseId: undefined
   };
+  state = {
+    courseData: null,
+    courseError: null,
+    lessonData: null,
+    lessonError: null
+  };
   componentDidMount() {
-    fakeApi("/courses").then(res => console.log(res));
-    fakeApi("/course/nodejs").then(res => console.log(res));
-    fakeApi("/course/docker/nextLesson")
-      .then(res => console.log(res))
-      .catch(err => console.warn(err));
-    fakeApi("/course/notfound")
-      .then(res => console.log(res))
-      .catch(err => console.warn(err));
+    const { courseId } = this.props;
+    this.loadCourseInfos(courseId);
+    this.loadNextLesson(courseId);
+  }
+  loadCourseInfos(courseId) {
+    this.setState({
+      courseData: null,
+      courseError: null
+    });
+    fakeApi(`/course/${courseId}`)
+      .then(courseData => {
+        this.setState({
+          courseData,
+          courseError: null
+        });
+      })
+      .catch(courseError => {
+        this.setState({
+          courseData: null,
+          courseError
+        });
+      });
+  }
+  loadNextLesson(courseId) {
+    this.setState({
+      lessonData: null,
+      lessonError: null
+    });
+    fakeApi(`/course/${courseId}/nextLesson`)
+      .then(lessonData => {
+        this.setState({
+          lessonData,
+          lessonError: null
+        });
+      })
+      .catch(lessonError => {
+        this.setState({
+          lessonData: null,
+          lessonError
+        });
+      });
   }
   render() {
     const { courseId } = this.props;
-    console.log({ courseId });
+    const { courseData, courseError, lessonData, lessonError } = this.state;
     return (
-      <div>
-        <p>
-          <span role="img" aria-label="home">
-            📖
-          </span>{" "}
-          Loading general courses infos ... Loading specific course{" "}
-          <strong>{courseId}</strong> infos ... (comming up)
-        </p>
-      </div>
+      <Fragment>
+        {courseData && (
+          <CourseInfos
+            data={courseData}
+            reload={() => {
+              this.loadCourseInfos(courseId);
+              this.loadNextLesson(courseId);
+            }}
+          />
+        )}
+        {!courseData && !courseError && <Spinner />}
+        {courseError && (
+          <p>
+            An error occured loading courses.{" "}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => this.loadCourseInfos(courseId)}
+            >
+              RETRY
+            </Button>
+          </p>
+        )}
+        {lessonData && <p>Next lesson: {lessonData}</p>}
+        {!lessonData && !lessonError && <Spinner />}
+        {lessonError && (
+          <p>
+            An error occured loading next lesson.{" "}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => this.loadNextLesson(courseId)}
+            >
+              RETRY
+            </Button>
+          </p>
+        )}
+      </Fragment>
     );
   }
 }

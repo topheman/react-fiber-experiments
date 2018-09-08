@@ -7,16 +7,13 @@ const HomeContainer = () => (
       <span role="img" aria-label="home">
         🏠
       </span>{" "}
-      This is the home page.
+      Welcome
     </p>
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
+    <ol>
       <li>
         <Link to="/regular">Regular loading/render</Link>
       </li>
-    </ul>
+    </ol>
   </div>
 );
 

@@ -23,6 +23,7 @@ const NetworkSlider = ({
   updateSliderValue,
   classes,
   className,
+  render,
   ...remainingProps
 }) => (
   <NetworkManager
@@ -51,6 +52,7 @@ const NetworkSlider = ({
           <div className={classes.networkStatus}>
             Network status: <strong>{networkModes[currentIndex]}</strong>
           </div>
+          {render ? render({ networkMode: networkModes[currentIndex] }) : null}
         </div>
       );
     }}
@@ -60,11 +62,13 @@ NetworkSlider.propTypes = {
   sliderValue: PropTypes.number,
   updateSliderValue: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  render: PropTypes.func
 };
 NetworkSlider.defaultProps = {
   sliderValue: undefined,
-  className: undefined
+  className: undefined,
+  render: undefined
 };
 
 export default compose(

@@ -2,7 +2,10 @@ import React from "react";
 import { Router } from "@reach/router";
 import Loadable from "react-loadable";
 
+import { getNetworkDelay } from "./libs/fake-api";
+
 import MainLayout from "./components/MainLayout";
+import Spinner from "./components/Spinner";
 
 // Containers that will be loaded by the router
 import HomeContainer from "./containers/HomeContainer";
@@ -13,10 +16,10 @@ import RegularHomeContainer from "./containers/RegularHomeContainer";
 const RegularCoursesContainer = Loadable({
   loader: () =>
     import("./containers/RegularCoursesContainer").then(script => {
-      const delay = 0; // todo retrieve from LocalStorage
+      const delay = getNetworkDelay("/scripts/course-container");
       return new Promise(resolve => setTimeout(() => resolve(script), delay));
     }),
-  loading: () => <div>loading ...</div>
+  loading: () => <Spinner style={{ color: "blue" }} size={75} />
 });
 
 /**

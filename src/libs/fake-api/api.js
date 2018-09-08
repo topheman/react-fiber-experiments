@@ -7,9 +7,16 @@ let datasCache, routesConfigCache, networkConfigCache; // cache
 const DEFAULT_MODE = "fastNetwork";
 
 const NETWORK_DEFINITION = {
-  slowNetwork: [{ pattern: "*", delay: 4000 }],
-  [DEFAULT_MODE]: [{ pattern: "*", delay: 150 }],
+  slowNetwork: [
+    { pattern: "/scripts/course-container", delay: 2000 },
+    { pattern: "*", delay: 4000 }
+  ],
+  [DEFAULT_MODE]: [
+    { pattern: "/scripts/course-container", delay: 150 },
+    { pattern: "*", delay: 150 }
+  ],
   slowEndPoint: [
+    { pattern: "/scripts/course-container", delay: 300 },
     { pattern: "/course/:topic/nextLesson", delay: 6000 },
     { pattern: "*", delay: 2000 }
   ]
