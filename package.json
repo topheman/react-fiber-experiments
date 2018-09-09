@@ -34,13 +34,13 @@
     "route-parser": "0.0.5"
   },
   "scripts": {
-    "start": "react-scripts --require ./bin/expand-metadatas.js start",
-    "build": "react-scripts --require ./bin/expand-metadatas.js build",
+    "start": "react-app-rewired --require ./bin/expand-metadatas.js start",
+    "build": "react-app-rewired --require ./bin/expand-metadatas.js build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "npm run test:unit",
     "test:unit": "cross-env CI=true npm run test:unit:watch",
-    "test:unit:watch": "react-scripts --require ./bin/expand-metadatas.js test --env=jsdom",
+    "test:unit:watch": "react-app-rewired --require ./bin/expand-metadatas.js test --env=jsdom",
     "test:precommit": "npm test",
     "test:travis": "npm test",
     "test:travis:pr": "echo 'Travis PRs do not have access to env vars, run your tests according to that' && npm test",
@@ -70,6 +70,7 @@
     "lint-staged": "^7.1.2",
     "moment": "^2.22.1",
     "prettier": "^1.14.2",
+    "react-app-rewired": "^1.6.2",
     "react-testing-library": "^5.0.0",
     "serve": "^10.0.0"
   },
