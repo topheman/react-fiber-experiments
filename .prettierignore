@@ -6,3 +6,4 @@ package.json
 .prettierignore
 .gitignore
 *.fixtures.json
+react-modules/*
