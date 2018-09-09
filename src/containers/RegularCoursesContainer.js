@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 
 import { fakeApi } from "../libs/fake-api";
 
 import CourseInfos from "../components/CourseInfos";
+import NextLesson from "../components/NextLesson";
+import ErrorRetry from "../components/ErrorRetry";
 import Spinner from "../components/Spinner";
 
 class RegularCoursesContainer extends Component {
@@ -28,6 +29,10 @@ class RegularCoursesContainer extends Component {
     this.loadCourseInfos(courseId);
     this.loadNextLesson(courseId);
   }
+  componentWillUnmount() {
+    this.isCancelled = true;
+  }
+  isCancelled = false;
   loadCourseInfos(courseId) {
     this.setState({
       courseData: null,
@@ -35,16 +40,20 @@ class RegularCoursesContainer extends Component {
     });
     fakeApi(`/course/${courseId}`)
       .then(courseData => {
-        this.setState({
-          courseData,
-          courseError: null
-        });
+        if (!this.isCancelled) {
+          this.setState({
+            courseData,
+            courseError: null
+          });
+        }
       })
       .catch(courseError => {
-        this.setState({
-          courseData: null,
-          courseError
-        });
+        if (!this.isCancelled) {
+          this.setState({
+            courseData: null,
+            courseError
+          });
+        }
       });
   }
   loadNextLesson(courseId) {
@@ -54,16 +63,20 @@ class RegularCoursesContainer extends Component {
     });
     fakeApi(`/course/${courseId}/nextLesson`)
       .then(lessonData => {
-        this.setState({
-          lessonData,
-          lessonError: null
-        });
+        if (!this.isCancelled) {
+          this.setState({
+            lessonData,
+            lessonError: null
+          });
+        }
       })
       .catch(lessonError => {
-        this.setState({
-          lessonData: null,
-          lessonError
-        });
+        if (!this.isCancelled) {
+          this.setState({
+            lessonData: null,
+            lessonError
+          });
+        }
       });
   }
   render() {
@@ -72,40 +85,30 @@ class RegularCoursesContainer extends Component {
     return (
       <Fragment>
         {courseData && (
-          <CourseInfos
-            data={courseData}
-            reload={() => {
-              this.loadCourseInfos(courseId);
-              this.loadNextLesson(courseId);
-            }}
-          />
+          <Fragment>
+            <CourseInfos
+              data={courseData}
+              reload={() => {
+                this.loadCourseInfos(courseId);
+                this.loadNextLesson(courseId);
+              }}
+            />
+            {lessonData && <NextLesson data={lessonData} />}
+            {!lessonData && !lessonError && <Spinner />}
+            {lessonError && (
+              <ErrorRetry
+                which="next lesson"
+                retryCallback={() => this.loadNextLesson(courseId)}
+              />
+            )}
+          </Fragment>
         )}
         {!courseData && !courseError && <Spinner />}
         {courseError && (
-          <p>
-            An error occured loading courses.{" "}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.loadCourseInfos(courseId)}
-            >
-              RETRY
-            </Button>
-          </p>
-        )}
-        {lessonData && <p>Next lesson: {lessonData}</p>}
-        {!lessonData && !lessonError && <Spinner />}
-        {lessonError && (
-          <p>
-            An error occured loading next lesson.{" "}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.loadNextLesson(courseId)}
-            >
-              RETRY
-            </Button>
-          </p>
+          <ErrorRetry
+            which="courses"
+            retryCallback={() => this.loadCourseInfos(courseId)}
+          />
         )}
       </Fragment>
     );

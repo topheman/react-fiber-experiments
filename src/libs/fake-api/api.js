@@ -12,8 +12,8 @@ const NETWORK_DEFINITION = {
     { pattern: "*", delay: 4000 }
   ],
   [DEFAULT_MODE]: [
-    { pattern: "/scripts/course-container", delay: 150 },
-    { pattern: "*", delay: 150 }
+    { pattern: "/scripts/course-container", delay: 300 },
+    { pattern: "*", delay: 300 }
   ],
   slowEndPoint: [
     { pattern: "/scripts/course-container", delay: 300 },
