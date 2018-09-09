@@ -18,7 +18,7 @@ const NETWORK_DEFINITION = {
   slowEndPoint: [
     { pattern: "/scripts/course-container", delay: 300 },
     { pattern: "/course/:topic/nextLesson", delay: 6000 },
-    { pattern: "*", delay: 2000 }
+    { pattern: "*", delay: 300 }
   ]
 };
 

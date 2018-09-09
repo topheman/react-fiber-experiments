@@ -21,13 +21,19 @@ const RegularContainer = ({ children, location }) => {
       <p>
         <Link to="/">
           <span role="img" aria-label="home">
-            🏠️
+            🏠️ Home
           </span>
         </Link>
         {" > "}
-        <Link to="./">Regular loading section</Link>
+        <Link to="..">Suspense</Link>
+        {" > "}
+        <Link to="./">
+          <strong>Regular</strong> rendering
+        </Link>{" "}
+        (current APIs)
         {relativeUrl && <span>{` > ${relativeUrl}`}</span>}
       </p>
+      <h2>Regular rendering</h2>
       <NetworkSlider
         render={({ networkMode }) => {
           if (relativeUrl) {
@@ -35,17 +41,9 @@ const RegularContainer = ({ children, location }) => {
               slowNetwork: (
                 <Fragment>
                   <p>
-                    When you have a low connexion,{" "}
-                    <strong>each spinner will show, in turn</strong> (some may
-                    show together because they are loading at the same time).
-                  </p>
-                  <p>
-                    <strong style={{ color: "blue" }}>
-                      The very first blue spinner
-                    </strong>{" "}
-                    you see signals the{" "}
-                    <strong>lazy loading of the JavaScript chunk</strong> of
-                    this part of the app.
+                    On a low connexion, we have one spinner (and eventually a{" "}
+                    <span style={{ color: "blue" }}>blue spinner</span> if this
+                    is first load, due to chunk lazy loading)
                   </p>
                 </Fragment>
               ),
@@ -60,9 +58,15 @@ const RegularContainer = ({ children, location }) => {
               slowEndPoint: (
                 <Fragment>
                   <p>
-                    A slow endpoint on your API will leave a spinner for a
-                    while.
+                    On a slow endpoint we have <strong>two spinners</strong>:
                   </p>
+                  <ul>
+                    <li>First Spinner for lessons list flashes</li>
+                    <li>
+                      Second spinner for next lesson signals the user it has to
+                      wait
+                    </li>
+                  </ul>
                 </Fragment>
               )
             };

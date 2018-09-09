@@ -5,9 +5,11 @@ import Button from "@material-ui/core/Button";
 const ErrorRetry = ({ retryCallback, which, ...remainingProps }) => (
   <p {...remainingProps}>
     An error occured loading {which}.{" "}
-    <Button variant="contained" color="primary" onClick={retryCallback}>
-      RETRY
-    </Button>
+    {retryCallback ? (
+      <Button variant="contained" color="primary" onClick={retryCallback}>
+        RETRY
+      </Button>
+    ) : null}
   </p>
 );
 

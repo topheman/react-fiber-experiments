@@ -2,9 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
+import { Link } from "@reach/router";
 
 const styles = {
-  root: {}
+  root: {},
+  backLink: {
+    textDecoration: "none",
+    background: "none",
+    marginRight: 5
+  }
 };
 
 const CourseInfos = ({
@@ -16,6 +22,11 @@ const CourseInfos = ({
 }) => (
   <div className={classNames(classes.root, className)} {...remainingProps}>
     <h2>
+      <Link to="../.." className={classes.backLink} title="Back">
+        <span role="img" aria-label="previous">
+          ⬅️
+        </span>
+      </Link>
       {reload ? (
         <span onClick={reload} role="button" tabIndex={0} onKeyDown={() => {}}>
           <span role="img" aria-label="reload" style={{ cursor: "pointer" }}>

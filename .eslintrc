@@ -2,6 +2,9 @@
   "extends": ["react-app", "airbnb", "prettier"],
   "plugins": ["prettier", "cypress"],
   "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "camelcase": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "prettier/prettier": "error",
     "no-console": "off",
@@ -11,15 +14,7 @@
     "import/prefer-default-export": "off",
     "prefer-template": "off",
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-    "global-require": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": false,
-        "peerDependencies": false
-      }
-    ]
+    "global-require": "off"
   },
   "globals": {
     "cy": true

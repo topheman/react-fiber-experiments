@@ -8,11 +8,14 @@ import MainLayout from "./components/MainLayout";
 import Spinner from "./components/Spinner";
 
 // Containers that will be loaded by the router
-import HomeContainer from "./containers/HomeContainer";
+import HomeContainer, { SuspenseExplanation } from "./containers/HomeContainer";
 import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
+import SuspenseContainer from "./containers/SuspenseContainer";
+import SuspenseHomeContainer from "./containers/SuspenseHomeContainer";
+import SuspenseCoursesContainer from "./containers/SuspenseCoursesContainer";
 
-// Lazy load - with specific delay
+// regular Lazy load, throttling with a specific delay
 const RegularCoursesContainer = loadable(
   () =>
     import("./containers/RegularCoursesContainer").then(script => {
@@ -21,6 +24,8 @@ const RegularCoursesContainer = loadable(
     }),
   { LoadingComponent: () => <Spinner style={{ color: "blue" }} size={75} /> }
 );
+
+// suspense Lazy load, throttling with a specific delay
 
 /**
  * <MainLayout> is not wrapped by the Router
@@ -31,10 +36,15 @@ const Routes = () => (
   <MainLayout>
     <Router>
       <HomeContainer path="/" />
-      <RegularContainer path="regular">
+      <SuspenseExplanation path="suspense" header />
+      <RegularContainer path="suspense/regular-rendering">
         <RegularHomeContainer path="/" />
         <RegularCoursesContainer path="/course/:courseId" />
       </RegularContainer>
+      <SuspenseContainer path="suspense/async-rendering">
+        <SuspenseHomeContainer path="/" />
+        <LazySuspenseCoursesContainer path="/course/:courseId" />
+      </SuspenseContainer>
     </Router>
   </MainLayout>
 );

@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import { Link } from "@reach/router";
 
 import { fakeApi } from "../libs/fake-api";
+import { cache } from "../cache";
 
 import CourseInfos from "../components/CourseInfos";
-import NextLesson from "../components/NextLesson";
+import NextLessonDisplay from "../components/NextLessonDisplay";
 import ErrorRetry from "../components/ErrorRetry";
 import Spinner from "../components/Spinner";
 
@@ -93,7 +95,7 @@ class RegularCoursesContainer extends Component {
                 this.loadNextLesson(courseId);
               }}
             />
-            {lessonData && <NextLesson data={lessonData} />}
+            {lessonData && <NextLessonDisplay data={lessonData} />}
             {!lessonData && !lessonError && <Spinner />}
             {lessonError && (
               <ErrorRetry
@@ -106,10 +108,19 @@ class RegularCoursesContainer extends Component {
         {!courseData && !courseError && <Spinner />}
         {courseError && (
           <ErrorRetry
-            which="courses"
+            which="course"
             retryCallback={() => this.loadCourseInfos(courseId)}
           />
         )}
+        <div>
+          <Link
+            to={`../../../async-rendering/course/${courseId}`}
+            onClick={() => cache.invalidate()}
+          >
+            Compare to async rendering
+          </Link>{" "}
+          (experimental APIs) - will reset suspense cache
+        </div>
       </Fragment>
     );
   }

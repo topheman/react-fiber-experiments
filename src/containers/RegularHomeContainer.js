@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-import courseList from "../libs/fake-api/fixtures.json";
+import CoursesList from "../components/CoursesList";
 
 /**
  * This component is mounted as the default subroute of `/regular`
@@ -9,8 +9,8 @@ import courseList from "../libs/fake-api/fixtures.json";
 const RegularHomeContainer = () => (
   <div>
     <p>
-      This is a fake api returning a list of courses. IRL you may have the
-      following use case:
+      Data comes from a fake api returning a list of courses. IRL you may have
+      the following use case:
     </p>
     <ul>
       <li>
@@ -19,29 +19,21 @@ const RegularHomeContainer = () => (
       </li>
       <li>
         Current lesson is user specific and might take longer due to auth /
-        no-cache ...
+        no-cache / slow query ...
       </li>
     </ul>
     <p>
-      You may change the network&apos;s behavior with the slider at the top.
-    </p>
-    <p>
-      The lazy loading of the JavaScript chunk is also emulated (this is the
-      very first spinner)
-    </p>
-    <p>
+      You may{" "}
       <strong>
-        Test the following links in different modes, then pass to the next
-        section.
-      </strong>
+        change the network&apos;s behavior with the slider at the top
+      </strong>{" "}
+      and choose one of the fake topics:
     </p>
-    <ul>
-      {courseList.map(course => (
-        <li key={course.id}>
-          <Link to={`course/${course.id}`}>{course.name}</Link>
-        </li>
-      ))}
-    </ul>
+    <CoursesList />
+    <p>
+      Then <Link to="/suspense/async-rendering">pass to the next section</Link>{" "}
+      (async rendering) .
+    </p>
   </div>
 );
 

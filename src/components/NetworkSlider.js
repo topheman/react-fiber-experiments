@@ -15,6 +15,11 @@ const styles = {
   },
   networkStatus: {
     lineHeight: "2rem"
+  },
+  emojiFinger: {
+    display: "block",
+    float: "left",
+    fontSize: "1.2rem"
   }
 };
 
@@ -37,6 +42,13 @@ const NetworkSlider = ({
           className={classNames(classes.root, className)}
           {...remainingProps}
         >
+          <span
+            role="img"
+            aria-label="finger right"
+            className={classes.emojiFinger}
+          >
+            👉
+          </span>
           <Slider
             className={classes.slider}
             min={0}
@@ -44,7 +56,6 @@ const NetworkSlider = ({
             value={currentIndex}
             step={1}
             onChange={(e, value) => {
-              console.log(value, networkModes, networkModes[value]);
               updateSliderValue(value);
               setNetworkMode(networkModes[value]);
             }}
