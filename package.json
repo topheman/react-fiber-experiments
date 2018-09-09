@@ -25,10 +25,10 @@
     "@material-ui/lab": "^3.0.0-alpha.14",
     "@reach/router": "^1.1.1",
     "classnames": "^2.2.6",
+    "loadable-components": "^2.2.3",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
-    "react-loadable": "^5.5.0",
     "react-scripts": "1.1.5",
     "recompose": "^0.30.0",
     "route-parser": "0.0.5"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
-import Loadable from "react-loadable";
+import loadable from "loadable-components";
 
 import { getNetworkDelay } from "./libs/fake-api";
 
@@ -13,14 +13,14 @@ import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
 
 // Lazy load - with specific delay
-const RegularCoursesContainer = Loadable({
-  loader: () =>
+const RegularCoursesContainer = loadable(
+  () =>
     import("./containers/RegularCoursesContainer").then(script => {
       const delay = getNetworkDelay("/scripts/course-container");
       return new Promise(resolve => setTimeout(() => resolve(script), delay));
     }),
-  loading: () => <Spinner style={{ color: "blue" }} size={75} />
-});
+  { LoadingComponent: () => <Spinner style={{ color: "blue" }} size={75} /> }
+);
 
 /**
  * <MainLayout> is not wrapped by the Router
