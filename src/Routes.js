@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Placeholder } from "react";
 import { Router } from "@reach/router";
 import loadable from "loadable-components";
 
@@ -13,7 +13,6 @@ import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
 import SuspenseContainer from "./containers/SuspenseContainer";
 import SuspenseHomeContainer from "./containers/SuspenseHomeContainer";
-import SuspenseCoursesContainer from "./containers/SuspenseCoursesContainer";
 
 // regular Lazy load, throttling with a specific delay
 const RegularCoursesContainer = loadable(
@@ -25,7 +24,31 @@ const RegularCoursesContainer = loadable(
   { LoadingComponent: () => <Spinner style={{ color: "blue" }} size={75} /> }
 );
 
-// suspense Lazy load, throttling with a specific delay
+/**
+ * suspense Lazy load, throttling with a specific delay - https://github.com/facebook/react/blob/master/packages/react/src/ReactLazy.js
+ *
+ * Without all the delay customizing, this would be:
+ *
+ * const Container = React.lazy(() => import("./containers/SuspenseCoursesContainer"))
+ */
+const SuspenseCourseContainerPromise = lazy(() =>
+  import("./containers/SuspenseCoursesContainer").then(
+    SuspenseCoursesContainerLoaded => {
+      const delay = getNetworkDelay("/scripts/course-container");
+      return new Promise(resolve =>
+        setTimeout(() => resolve(SuspenseCoursesContainerLoaded), delay)
+      );
+    }
+  )
+);
+const LazySuspenseCoursesContainer = props => (
+  <Placeholder
+    delayMs={300}
+    fallback={<Spinner style={{ color: "blue" }} size={75} />}
+  >
+    <SuspenseCourseContainerPromise {...props} />
+  </Placeholder>
+);
 
 /**
  * <MainLayout> is not wrapped by the Router
