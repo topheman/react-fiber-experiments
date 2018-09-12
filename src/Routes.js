@@ -9,6 +9,8 @@ import Spinner from "./components/Spinner";
 
 // Containers that will be loaded by the router
 import HomeContainer, { SuspenseExplanation } from "./containers/HomeContainer";
+import AboutContainer from "./containers/AboutContainer";
+import QrcodeContainer from "./containers/QrcodeContainer";
 import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
 import SuspenseContainer from "./containers/SuspenseContainer";
@@ -62,6 +64,8 @@ const Routes = () => (
   <MainLayout>
     <Router>
       <HomeContainer path="/" />
+      <AboutContainer path="/about" />
+      <QrcodeContainer path="/qrcode" />
       <SuspenseExplanation path="suspense" header />
       <RegularContainer path="suspense/regular-rendering">
         <RegularHomeContainer path="/" />
