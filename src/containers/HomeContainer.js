@@ -27,6 +27,10 @@ export const SuspenseExplanation = ({ header }) => (
         <Link to="/suspense/async-rendering">Async rendering</Link>{" "}
         (experimental APIs)
       </li>
+      <li>
+        <Link to="/suspense/simple/delayMs/350">Simple</Link> (play with
+        Playholder)
+      </li>
     </ol>
   </Fragment>
 );

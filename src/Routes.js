@@ -13,6 +13,9 @@ import RegularContainer from "./containers/RegularContainer";
 import RegularHomeContainer from "./containers/RegularHomeContainer";
 import SuspenseContainer from "./containers/SuspenseContainer";
 import SuspenseHomeContainer from "./containers/SuspenseHomeContainer";
+import AsyncRenderingBasisContainer, {
+  DelayContainer
+} from "./containers/AsyncRenderingBasisContainer";
 
 // regular Lazy load, throttling with a specific delay
 const RegularCoursesContainer = loadable(
@@ -68,6 +71,9 @@ const Routes = () => (
         <SuspenseHomeContainer path="/" />
         <LazySuspenseCoursesContainer path="/course/:courseId" />
       </SuspenseContainer>
+      <AsyncRenderingBasisContainer path="suspense/simple/delayMs/:delayMs">
+        <DelayContainer path="/duration/:duration" />
+      </AsyncRenderingBasisContainer>
     </Router>
   </MainLayout>
 );
