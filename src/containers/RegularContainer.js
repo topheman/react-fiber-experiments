@@ -31,7 +31,18 @@ const RegularContainer = ({ children, location }) => {
           <strong>Regular</strong> rendering
         </Link>{" "}
         (current APIs)
-        {relativeUrl && <span>{` > ${relativeUrl}`}</span>}
+        {relativeUrl && (
+          <Fragment>
+            <span>{` > ${relativeUrl}`}</span>{" "}
+            <a
+              href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/RegularCoursesContainer.js"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              [view source on github]
+            </a>
+          </Fragment>
+        )}
       </p>
       <h2>Regular rendering</h2>
       <NetworkSlider

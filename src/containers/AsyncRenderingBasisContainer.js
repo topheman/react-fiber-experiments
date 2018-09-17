@@ -51,7 +51,14 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
       {" > "}
       <Link to="../../..">Suspense</Link>
       {" > "}
-      Async Rendering Basis
+      Async Rendering Basis{" "}
+      <a
+        href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/AsyncRenderingBasisContainer.js"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        [view source on github]
+      </a>
     </p>
     <h2>Async Rendering Basis</h2>
     <p>

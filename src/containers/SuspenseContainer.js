@@ -33,7 +33,18 @@ const SuspenseContainer = ({ children, location }) => {
           <strong>Async</strong> rendering
         </Link>{" "}
         (experimental APIs)
-        {relativeUrl && <span>{` > ${relativeUrl}`}</span>}
+        {relativeUrl && (
+          <Fragment>
+            <span>{` > ${relativeUrl}`}</span>{" "}
+            <a
+              href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/SuspenseCoursesContainer.js"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              [view source on github]
+            </a>
+          </Fragment>
+        )}
       </p>
       <h2>Async rendering</h2>
       <NetworkSlider
