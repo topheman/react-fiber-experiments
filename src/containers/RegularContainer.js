@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 import NetworkSlider from "../components/NetworkSlider";
+import ViewSourceLink from "../components/ViewSourceLink";
 
 /**
  * This component is mounted by the router at `/regular`
@@ -32,16 +33,7 @@ const RegularContainer = ({ children, location }) => {
         </Link>{" "}
         (current APIs)
         {relativeUrl && (
-          <Fragment>
-            <span>{` > ${relativeUrl}`}</span>{" "}
-            <a
-              href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/RegularCoursesContainer.js"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              [view source on github]
-            </a>
-          </Fragment>
+          <ViewSourceLink filename="src/containers/RegularCoursesContainer.js" />
         )}
       </p>
       <h2>Regular rendering</h2>

@@ -5,6 +5,7 @@ import { Link } from "@reach/router";
 import NetworkSlider from "../components/NetworkSlider";
 import { cache } from "../cache";
 import { getNetworkDelay } from "../libs/fake-api";
+import ViewSourceLink from "../components/ViewSourceLink";
 
 /**
  * This component is mounted by the router at `/regular`
@@ -34,16 +35,7 @@ const SuspenseContainer = ({ children, location }) => {
         </Link>{" "}
         (experimental APIs)
         {relativeUrl && (
-          <Fragment>
-            <span>{` > ${relativeUrl}`}</span>{" "}
-            <a
-              href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/SuspenseCoursesContainer.js"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              [view source on github]
-            </a>
-          </Fragment>
+          <ViewSourceLink filename="src/containers/SuspenseCoursesContainer.js" />
         )}
       </p>
       <h2>Async rendering</h2>

@@ -6,6 +6,7 @@ import { Slider } from "@material-ui/lab";
 
 import { cache } from "../cache";
 import Spinner from "../components/Spinner";
+import ViewSourceLink from "../components/ViewSourceLink";
 
 /**
  * Basic resource that will execute a promise that will resolve after `duration` ms
@@ -42,6 +43,7 @@ DelayContainer.defaultProps = {
 
 const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
   <div>
+    <ViewSourceLink filename="src/containers/AsyncRenderingBasisContainer.js" />
     <p>
       <Link to="/">
         <span role="img" aria-label="home">
@@ -51,14 +53,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
       {" > "}
       <Link to="../../..">Suspense</Link>
       {" > "}
-      Async Rendering Basis{" "}
-      <a
-        href="https://github.com/topheman/react-fiber-experiments/tree/master/src/containers/AsyncRenderingBasisContainer.js"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        [view source on github]
-      </a>
+      Async Rendering Basis
     </p>
     <h2>Async Rendering Basis</h2>
     <p>
