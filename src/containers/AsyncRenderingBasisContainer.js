@@ -6,6 +6,7 @@ import { Slider } from "@material-ui/lab";
 
 import { cache } from "../cache";
 import Spinner from "../components/Spinner";
+import DurationList from "../components/DurationList";
 import ViewSourceLink from "../components/ViewSourceLink";
 
 /**
@@ -43,7 +44,6 @@ DelayContainer.defaultProps = {
 
 const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
   <div>
-    <ViewSourceLink filename="src/containers/AsyncRenderingBasisContainer.js" />
     <p>
       <Link to="/">
         <span role="img" aria-label="home">
@@ -54,6 +54,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
       <Link to="../../..">Suspense</Link>
       {" > "}
       Async Rendering Basis
+      <ViewSourceLink filename="src/containers/AsyncRenderingBasisContainer.js" />
     </p>
     <h2>Async Rendering Basis</h2>
     <p>
@@ -88,13 +89,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
         Reset cache
       </span>
     </p>
-    <ul>
-      {[150, 300, 1000, 2000, 3000, 5000, 6000, 10000].map(duration => (
-        <li key={duration}>
-          <Link to={`./duration/${duration}`}>{duration}</Link>
-        </li>
-      ))}
-    </ul>
+    <DurationList />
     {children}
   </div>
 );
