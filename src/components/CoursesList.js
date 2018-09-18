@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 import { withStyles } from "@material-ui/core/styles";
@@ -23,6 +23,9 @@ const styles = {
       borderRadius: 5,
       textAlign: "center",
       lineHeight: "50px"
+    },
+    "& li a.loading": {
+      opacity: 0.5
     }
   },
   emojiFinger: {
@@ -32,30 +35,55 @@ const styles = {
   }
 };
 
-const CoursesList = ({ classes, className, ...remainingProps }) => (
-  <Fragment>
-    <span role="img" aria-label="finger right" className={classes.emojiFinger}>
-      👉
-    </span>
-    <ul className={classNames(classes.root, className)} {...remainingProps}>
-      {courseList.map(course => (
-        <li key={course.id}>
-          <Link to={`course/${course.id}`}>{course.name}</Link>
-        </li>
-      ))}
-    </ul>
-  </Fragment>
-);
-
-CoursesList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  style: PropTypes.object
-};
-
-CoursesList.defaultProps = {
-  className: undefined,
-  style: undefined
-};
+class CoursesList extends Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    className: PropTypes.string,
+    style: PropTypes.object
+  };
+  static defaultProps = {
+    className: undefined,
+    style: undefined
+  };
+  state = {
+    currentLink: null
+  };
+  render() {
+    const { classes, className, ...remainingProps } = this.props;
+    return (
+      <Fragment>
+        <span
+          role="img"
+          aria-label="finger right"
+          className={classes.emojiFinger}
+        >
+          👉
+        </span>
+        <ul className={classNames(classes.root, className)} {...remainingProps}>
+          {courseList.map(course => {
+            const isLoadingLink =
+              this.state.currentLink &&
+              this.state.currentLink.endsWith(course.id);
+            return (
+              <li key={course.id}>
+                <Link
+                  to={`course/${course.id}`}
+                  onClick={event => {
+                    this.setState({
+                      currentLink: event.target.href
+                    });
+                  }}
+                  className={isLoadingLink ? "loading" : null}
+                >
+                  {course.name}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </Fragment>
+    );
+  }
+}
 
 export default withStyles(styles)(CoursesList);
