@@ -114,7 +114,7 @@ class RegularCoursesContainer extends Component {
         )}
         <div>
           <Link
-            to={`../../../async-rendering/course/${courseId}`}
+            to={`../../../async-rendering/delayMs/DEFAULT_DELAY_MS/course/${courseId}`}
             onClick={() => cache.invalidate()}
           >
             Compare to async rendering

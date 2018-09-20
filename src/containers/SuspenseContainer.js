@@ -12,7 +12,8 @@ import ViewSourceLink from "../components/ViewSourceLink";
  * It wrapps children described with `path` prop so they respond to router changes
  * In the header: a relative link! To go back to this component
  */
-const SuspenseContainer = ({ children, location }) => {
+const SuspenseContainer = ({ children, delayMs, location }) => {
+  const waitingMode = parseInt(delayMs, 10) >= 10000;
   const REGEXP_MATCH = /\/course(\/.*)?/;
   // const baseUrl = location.pathname.replace(REGEXP_MATCH, "");
   let relativeUrl = location.pathname.match(REGEXP_MATCH);
@@ -28,17 +29,25 @@ const SuspenseContainer = ({ children, location }) => {
           </span>
         </Link>
         {" > "}
-        <Link to="..">Suspense</Link>
+        <Link to="../../..">Suspense</Link>
         {" > "}
-        <Link to="./">
-          <strong>Async</strong> rendering
-        </Link>{" "}
-        (experimental APIs)
-        {relativeUrl && (
-          <ViewSourceLink filename="src/containers/SuspenseCoursesContainer.js" />
+        {waitingMode ? (
+          <Link to="./">
+            <strong>Waiting Mode</strong>
+          </Link>
+        ) : (
+          <Fragment>
+            <Link to="./">
+              <strong>Async</strong> rendering
+            </Link>{" "}
+            (experimental APIs)
+            {relativeUrl && (
+              <ViewSourceLink filename="src/containers/SuspenseCoursesContainer.js" />
+            )}
+          </Fragment>
         )}
       </p>
-      <h2>Async rendering</h2>
+      <h2>{waitingMode ? "Waiting Mode" : "Async rendering"}</h2>
       <NetworkSlider
         render={({ networkMode }) => {
           const explainResetCache = (
@@ -120,7 +129,7 @@ const SuspenseContainer = ({ children, location }) => {
             return (
               <Fragment>
                 {explainResetCache}
-                {explanations[networkMode]}
+                {waitingMode ? null : explanations[networkMode]}
               </Fragment>
             );
           }
@@ -131,16 +140,17 @@ const SuspenseContainer = ({ children, location }) => {
     </div>
   );
 };
-
 SuspenseContainer.propTypes = {
   // can't put .isRequired - Router seems to not only clone but also render Router children
   // which leeds to propTypes validation before the componenent is mounted on route match
   // https://github.com/reach/router/blob/master/src/index.js#L223-L226
   location: PropTypes.object, // from the Router
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  delayMs: PropTypes.string
 };
 SuspenseContainer.defaultProps = {
-  location: undefined
+  location: undefined,
+  delayMs: undefined
 };
 
 export default SuspenseContainer;

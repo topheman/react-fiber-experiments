@@ -12,6 +12,12 @@ import ErrorRetry from "../components/ErrorRetry";
 import Spinner from "../components/Spinner";
 
 /**
+ * Note: The delayMs prop you see flowing up to down comes from the router
+ * That way, you can specify the delayMs of the Placeholders around the just
+ * by changing a little param in the url
+ */
+
+/**
  * Network failure handling - I've tried:
  * - ErrorBoundaries: The first error thrown by the api promise is catched but the ones
  * thrown after by simple-cache-provider due to cache miss after trying to remount the node
@@ -31,17 +37,17 @@ const NextLessonResource = createResource(courseId =>
   fakeApi(`/course/${courseId}/nextLesson`).catch(error => ({ error }))
 );
 
-const Course = ({ courseId, ...remainingProps }) => {
+const Course = ({ courseId, delayMs, ...remainingProps }) => {
   NextLessonResource.preload(cache, courseId); // avoid serial requests
   const courseData = CourseResource.read(cache, courseId);
   return courseData && !courseData.error ? (
     <div {...remainingProps}>
       <CourseInfos data={courseData} />
-      <Placeholder delayMs={350} fallback={<Spinner />}>
+      <Placeholder delayMs={parseInt(delayMs, 10)} fallback={<Spinner />}>
         <NextLesson courseId={courseId} />
       </Placeholder>
       <div>
-        <Link to={`../../../regular-rendering/course/${courseId}`}>
+        <Link to={`../../../../../regular-rendering/course/${courseId}`}>
           Compare to regular rendering
         </Link>{" "}
         (current APIs)
@@ -52,7 +58,8 @@ const Course = ({ courseId, ...remainingProps }) => {
   );
 };
 Course.propTypes = {
-  courseId: PropTypes.string.isRequired
+  courseId: PropTypes.string.isRequired,
+  delayMs: PropTypes.string.isRequired
 };
 
 const NextLesson = ({ courseId, ...remainingProps }) => {
@@ -67,18 +74,20 @@ NextLesson.propTypes = {
   courseId: PropTypes.string.isRequired
 };
 
-const SuspenseCoursesContainer = ({ courseId }) => (
+const SuspenseCoursesContainer = ({ courseId, delayMs }) => (
   <Fragment>
-    <Placeholder delayMs={350} fallback={<Spinner />}>
-      <Course courseId={courseId} />
+    <Placeholder delayMs={parseInt(delayMs, 10)} fallback={<Spinner />}>
+      <Course courseId={courseId} delayMs={delayMs} />
     </Placeholder>
   </Fragment>
 );
 SuspenseCoursesContainer.propTypes = {
-  courseId: PropTypes.string
+  courseId: PropTypes.string,
+  delayMs: PropTypes.string
 };
 SuspenseCoursesContainer.defaultProps = {
-  courseId: undefined
+  courseId: undefined,
+  delayMs: "350"
 };
 
 export default SuspenseCoursesContainer;

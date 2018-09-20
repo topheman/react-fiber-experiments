@@ -1,6 +1,7 @@
 import React, { lazy, Placeholder } from "react";
-import { Router } from "@reach/router";
+import { Router, Redirect } from "@reach/router";
 import loadable from "loadable-components";
+import PropTypes from "prop-types";
 
 import { getNetworkDelay } from "./libs/fake-api";
 
@@ -48,12 +49,18 @@ const SuspenseCourseContainerPromise = lazy(() =>
 );
 const LazySuspenseCoursesContainer = props => (
   <Placeholder
-    delayMs={300}
+    delayMs={parseInt(props.delayMs, 10)}
     fallback={<Spinner style={{ color: "blue" }} size={75} />}
   >
     <SuspenseCourseContainerPromise {...props} />
   </Placeholder>
 );
+LazySuspenseCoursesContainer.propTypes = {
+  delayMs: PropTypes.string
+};
+LazySuspenseCoursesContainer.defaultProps = {
+  delayMs: undefined
+};
 
 /**
  * <MainLayout> is not wrapped by the Router
@@ -63,6 +70,21 @@ const LazySuspenseCoursesContainer = props => (
 const Routes = () => (
   <MainLayout>
     <Router>
+      <Redirect
+        from="/suspense/async-rendering"
+        to="/suspense/async-rendering/delayMs/350"
+        noThrow
+      />
+      <Redirect
+        from="/suspense/async-rendering/delayMs/DEFAULT_DELAY_MS/course/:courseId"
+        to="/suspense/async-rendering/delayMs/350/course/:courseId"
+        noThrow
+      />
+      <Redirect
+        from="/suspense/simple"
+        to="/suspense/simple/delayMs/350"
+        noThrow
+      />
       <HomeContainer path="/" />
       <AboutContainer path="/about" />
       <QrcodeContainer path="/qrcode" />
@@ -71,7 +93,7 @@ const Routes = () => (
         <RegularHomeContainer path="/" />
         <RegularCoursesContainer path="/course/:courseId" />
       </RegularContainer>
-      <SuspenseContainer path="suspense/async-rendering">
+      <SuspenseContainer path="suspense/async-rendering/delayMs/:delayMs">
         <SuspenseHomeContainer path="/" />
         <LazySuspenseCoursesContainer path="/course/:courseId" />
       </SuspenseContainer>
