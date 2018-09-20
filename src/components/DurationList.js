@@ -69,7 +69,20 @@ class DurationList extends Component {
     style: PropTypes.object
   };
   static defaultProps = {
-    durations: [150, 300, 1000, 2000, 3000, 5000, 6000, 10000],
+    durations: [
+      150,
+      300,
+      1000,
+      2000,
+      3000,
+      5000,
+      6000,
+      10000,
+      3010,
+      3020,
+      3030,
+      3040
+    ],
     className: undefined,
     style: undefined
   };
