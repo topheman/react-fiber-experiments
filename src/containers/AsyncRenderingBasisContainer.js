@@ -89,8 +89,8 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
         Reset cache
       </span>
     </p>
-    <DurationList />
     {children}
+    <DurationList />
   </div>
 );
 AsyncRenderingBasisContainer.propTypes = {

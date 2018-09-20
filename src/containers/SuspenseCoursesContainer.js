@@ -87,7 +87,7 @@ SuspenseCoursesContainer.propTypes = {
 };
 SuspenseCoursesContainer.defaultProps = {
   courseId: undefined,
-  delayMs: "350"
+  delayMs: undefined
 };
 
 export default SuspenseCoursesContainer;

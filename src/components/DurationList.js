@@ -11,6 +11,9 @@ const styles = {
     "& li": {
       display: "inline-block"
     },
+    "& li a .render-finished": {
+      pointerEvents: "none"
+    },
     "& li a": {
       display: "inline-block",
       width: 150,
