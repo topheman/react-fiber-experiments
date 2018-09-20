@@ -31,6 +31,13 @@ class RegularCoursesContainer extends Component {
     this.loadCourseInfos(courseId);
     this.loadNextLesson(courseId);
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.courseId !== this.props.courseId) {
+      console.log("didUpdate");
+      this.loadCourseInfos(this.props.courseId);
+      this.loadNextLesson(this.props.courseId);
+    }
+  }
   componentWillUnmount() {
     this.isCancelled = true;
   }
