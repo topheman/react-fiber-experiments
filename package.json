@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "react-app-rewired --require ./bin/expand-metadatas.js start",
-    "build": "react-app-rewired --require ./bin/expand-metadatas.js build",
+    "build": "react-app-rewired --require ./bin/expand-metadatas.js build && cp build/index.html build/200.html",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "npm run test:unit",
