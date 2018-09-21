@@ -33,9 +33,9 @@ const Footer = ({
     </p>
     <p>
       <TwitterButton
-        text="Test the last features of #reactjs like #suspense"
-        url="https://topheman.github.io/react-fiber-experiments"
-        hashtags="react, fiber"
+        text="Discover React Suspense and the new features of React Fiber"
+        url="https://react-fiber-experiments.surge.sh"
+        hashtags="React, ReactJS, ReactSuspense"
         via="topheman"
         related="react, material-ui"
       />

@@ -2,7 +2,7 @@
   "name": "react-fiber-experiments",
   "version": "0.0.1",
   "private": true,
-  "description": "create-react-app based project with a few pre-configured / installed features such as eslint or prettier",
+  "description": "Discover React Fiber's new features like Suspense",
   "keywords": [
     "React",
     "create-react-app",
