@@ -29,6 +29,20 @@
   <meta name="twitter:site" content="@topheman">
   <meta name="twitter:creator" content="@topheman">
   <meta name="twitter:card" content="summary_large_image">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41002835-2"></script>
+  <script>
+    // only run analytics in production
+    (function (env) {
+      if (env === "production" && location.hostname === "react-fiber-experiments.surge.sh") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-41002835-2');
+      }
+    })("%NODE_ENV%")
+  </script>
 </head>
 
 <body>
