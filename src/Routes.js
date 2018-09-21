@@ -81,8 +81,8 @@ const Routes = () => (
         noThrow
       />
       <Redirect
-        from="/suspense/simple"
-        to="/suspense/simple/delayMs/350"
+        from="/suspense/placeholder"
+        to="/suspense/placeholder/delayMs/350"
         noThrow
       />
       <HomeContainer path="/" />
@@ -97,7 +97,7 @@ const Routes = () => (
         <SuspenseHomeContainer path="/" />
         <LazySuspenseCoursesContainer path="/course/:courseId" />
       </SuspenseContainer>
-      <AsyncRenderingBasisContainer path="suspense/simple/delayMs/:delayMs">
+      <AsyncRenderingBasisContainer path="suspense/placeholder/delayMs/:delayMs">
         <DelayContainer path="/duration/:duration" />
       </AsyncRenderingBasisContainer>
     </Router>

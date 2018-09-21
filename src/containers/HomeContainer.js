@@ -28,7 +28,7 @@ export const SuspenseExplanation = ({ header }) => (
         (experimental APIs)
       </li>
       <li>
-        <Link to="/suspense/simple">Simple</Link> (play with Playholder)
+        <Link to="/suspense/placeholder">Play with Placeholder</Link>
       </li>
     </ol>
   </Fragment>

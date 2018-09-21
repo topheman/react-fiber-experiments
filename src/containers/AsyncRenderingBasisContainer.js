@@ -72,7 +72,9 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
       max={10000}
       step={100}
       value={parseInt(delayMs, 10)}
-      onChange={(event, value) => navigate(`/suspense/simple/delayMs/${value}`)}
+      onChange={(event, value) =>
+        navigate(`/suspense/placeholder/delayMs/${value}`)
+      }
     />
     <pre>{`<Placeholder delayMs={${delayMs}} fallback={<Spinner />}>`}</pre>
     <p>
