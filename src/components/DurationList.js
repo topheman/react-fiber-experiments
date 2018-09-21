@@ -111,7 +111,7 @@ class DurationList extends Component {
                   getProps={isActive}
                 >
                   <span className="render-finished">{duration}</span>
-                  <span className="render-paused">Render paused</span>
+                  <span className="render-paused">Suspend</span>
                 </Link>
               </li>
             );
