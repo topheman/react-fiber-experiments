@@ -57,6 +57,15 @@ const HomeContainer = () => (
       , not only the <strong>code part</strong>, but also to highlight what we
       may <strong>benefit on the UI/UX part</strong>.
     </p>
+    <p>
+      <span role="img" aria-label="video">
+        📺
+      </span>{" "}
+      Before starting, checkout this{" "}
+      <a href="http://dev.topheman.com/discover-react-suspense/">
+        video for explanations about React Suspense
+      </a>
+    </p>
     <SuspenseExplanation />
   </div>
 );

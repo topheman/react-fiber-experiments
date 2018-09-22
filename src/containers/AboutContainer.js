@@ -13,7 +13,16 @@ const AboutContainer = () => (
       <strong>About</strong>
     </p>
     <h2>About</h2>
-    <p>Some infos ...</p>
+    <p>
+      I think I said everythink in my{" "}
+      <a href="http://dev.topheman.com/discover-react-suspense/">
+        video / post on React Suspense
+      </a>{" "}
+      <span role="img" aria-label="smile">
+        😉
+      </span>{" "}
+      ... Maybe I&apos;ll remove this about page ...
+    </p>
   </Fragment>
 );
 
