@@ -87,3 +87,4 @@ The [original CRA guidelines are still available here](README.cra.md)
 - [Demo: Coordinating async React with non-React views](https://gist.github.com/acdlite/f31becd03e2f5feb9b4b22267a58bc1f) - draft by Andrew Clark
 - [Suspense section in facebook/react](https://github.com/facebook/react/tree/master/fixtures/unstable-async/suspense#readme)
 - [@reach/router](https://github.com/reach/router) by Ryan Florence
+- [sw-yx/fresh-async-react](https://github.com/sw-yx/fresh-async-react) - a repo of links about Async React maintained by [@swyx](https://twitter.com/swyx) that you can PR
