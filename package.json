@@ -4,6 +4,8 @@
   "private": true,
   "description": "Discover React Fiber's new features like Suspense",
   "keywords": [
+    "Suspense",
+    "React Fiber",
     "React",
     "create-react-app",
     "eslint",
