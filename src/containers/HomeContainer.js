@@ -1,6 +1,29 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core";
+
+const styles = {
+  videoContainer: {
+    position: "relative",
+    paddingBottom: "56.25%",
+    paddingTop: "30px",
+    height: 0,
+    overflow: "hidden",
+    "& iframe, & object, & embed": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%"
+    }
+  },
+  videoWrapper: {
+    width: 450,
+    maxWidth: "100%",
+    margin: "0 auto"
+  }
+};
 
 export const SuspenseExplanation = ({ header }) => (
   <Fragment>
@@ -17,7 +40,14 @@ export const SuspenseExplanation = ({ header }) => (
         </Link>
       </p>
     )}
-    <h3>Suspense</h3>
+    <h3>
+      {!header && (
+        <span role="img" aria-label="this way">
+          👉
+        </span>
+      )}
+      Suspense
+    </h3>
     <ol>
       <li>
         <Link to="/suspense/regular-rendering">Regular rendering</Link> (current
@@ -40,7 +70,7 @@ SuspenseExplanation.defaultProps = {
   header: false
 };
 
-const HomeContainer = () => (
+const HomeContainer = ({ classes }) => (
   <div>
     <p>
       <span role="img" aria-label="home">
@@ -57,17 +87,23 @@ const HomeContainer = () => (
       , not only the <strong>code part</strong>, but also to highlight what we
       may <strong>benefit on the UI/UX part</strong>.
     </p>
-    <p>
-      <span role="img" aria-label="video">
-        📺
-      </span>{" "}
-      Before starting, checkout this{" "}
-      <a href="http://dev.topheman.com/discover-react-suspense/">
-        video for explanations about React Suspense
-      </a>
-    </p>
+    <div className={classes.videoWrapper}>
+      <div className={classes.videoContainer}>
+        <iframe
+          title="Discover React Suspense"
+          src="https://www.youtube.com/embed/Nj4q2fHulqc"
+          width="560"
+          height="315"
+          frameBorder="0"
+          allowFullScreen="allowfullscreen"
+        />
+      </div>
+    </div>
     <SuspenseExplanation />
   </div>
 );
+HomeContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-export default HomeContainer;
+export default withStyles(styles)(HomeContainer);
