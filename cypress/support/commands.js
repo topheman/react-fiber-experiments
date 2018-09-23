@@ -25,6 +25,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import "./commands.shared.js"; // specific commands for the tests of this website
+
 /**
  * Call this before running a test suite to make sure you have the latest
  * version of the code.

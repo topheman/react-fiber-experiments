@@ -68,6 +68,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
       <li>Apply different delayMs with the slider:</li>
     </ul>
     <Slider
+      data-testid="placeholder-slider"
       min={0}
       max={10000}
       step={100}
@@ -76,7 +77,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
         navigate(`/suspense/placeholder/delayMs/${value}`)
       }
     />
-    <pre>{`<Placeholder delayMs={${delayMs}} fallback={<Spinner />}>`}</pre>
+    <pre data-testid="placeholder-preview">{`<Placeholder delayMs={${delayMs}} fallback={<Spinner />}>`}</pre>
     <p>
       <span
         onClick={() => cache.invalidate()}

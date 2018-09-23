@@ -29,6 +29,7 @@ const NetworkSlider = ({
   classes,
   className,
   render,
+  "data-testid": dataTestid,
   ...remainingProps
 }) => (
   <NetworkManager
@@ -40,6 +41,7 @@ const NetworkSlider = ({
       return (
         <div
           className={classNames(classes.root, className)}
+          data-testid={`${dataTestid}-wrapper`}
           {...remainingProps}
         >
           <span
@@ -50,6 +52,7 @@ const NetworkSlider = ({
             👉
           </span>
           <Slider
+            data-testid={dataTestid}
             className={classes.slider}
             min={0}
             max={networkModes.length - 1}
@@ -74,12 +77,14 @@ NetworkSlider.propTypes = {
   updateSliderValue: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
-  render: PropTypes.func
+  render: PropTypes.func,
+  "data-testid": PropTypes.string
 };
 NetworkSlider.defaultProps = {
   sliderValue: undefined,
   className: undefined,
-  render: undefined
+  render: undefined,
+  "data-testid": undefined
 };
 
 export default compose(
