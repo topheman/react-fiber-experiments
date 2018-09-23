@@ -2,6 +2,7 @@
   "extends": ["react-app", "airbnb", "prettier"],
   "plugins": ["prettier", "cypress"],
   "rules": {
+    "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
     "camelcase": "off",

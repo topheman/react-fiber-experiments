@@ -13,8 +13,21 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+// cypress lacks support for some method in `cypress open` mode (not same chrome version as in `cypress run`)
+import "babel-polyfill";
+
+// Import command from cypress-testing-library
+import "cypress-testing-library/add-commands";
+
 // Import commands.js using ES2015 syntax:
 import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Execute / log some task before doing anything, like flushing service worker cache
+describe("Prepare test run ...", () => {
+  it("Starting ...", () => {
+    cy.prepareTestRun();
+  });
+});

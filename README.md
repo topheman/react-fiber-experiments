@@ -41,14 +41,35 @@ Run `npm run serve` to test your build on a local server.
 
 ## Test
 
-The following command will run all your tests in a single run mode.
+The following command will run **all your tests** (both unit and end to end) in a single run mode.
 
 ```shell
 npm test
 ```
 
+### Unit tests
+
 - `npm run test:unit` : single run of the unit tests
 - `npm run test:unit:watch` : run the unit tests in watch mode
+
+### End to end tests
+
+Works the same way as the end to end tests of the [topheman/npm-registry-browser](https://github.com/topheman/npm-registry-browser#end-to-end) project.
+
+I'm using [cypress.io](https://www.cypress.io/) for the e2e tests. You will find them in [cypress/integration](cypress/integration).
+
+- `npm run test:cypress` : **single run the e2e tests**. It will:
+  - build the project and serve it on [http://localhost:5000](http://localhost:5000) (that way, your tests reflect exactly what the end user would see in production)
+  - run the tests in [cypress/integration](cypress/integration) folder
+  - tear down once tests are passed (or failed)
+- `npm run test:cypress:dev` : use this one when you're **coding your tests**. It will:
+  - spin up a dev server on [http://localhost:3000](http://localhost:3000) (so, you don't have to `npm start`)
+  - open the cypress client that will let you choose which tests you want to run
+- `npm run test:cypress:debug-build` : use this if your e2e tests only fail on a production bundle, to **debug the tests with the production version** of your app. It will:
+  - build the project and serve it on [http://localhost:5000](http://localhost:5000)
+  - open the cypress client that will let you choose which tests you want to run
+
+On this project the end to end tests are not run on the precommit hook, they are run on the CI to gain time (take a few seconds before pushing to run them).
 
 ## Linter / Prettier
 
