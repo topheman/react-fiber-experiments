@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://localhost:5000",
   "video": false,
-  "chromeWebSecurity": true,
+  "chromeWebSecurity": false,
   "projectId": "1ru71n",
   "testFiles": "**/index.spec.js"
 }

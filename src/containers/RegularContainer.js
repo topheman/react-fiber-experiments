@@ -38,6 +38,7 @@ const RegularContainer = ({ children, location }) => {
       </p>
       <h2>Regular rendering</h2>
       <NetworkSlider
+        data-testid="network-slider"
         render={({ networkMode }) => {
           if (relativeUrl) {
             const explanations = {
