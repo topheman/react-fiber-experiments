@@ -96,25 +96,32 @@ class RegularCoursesContainer extends Component {
         {courseData && (
           <Fragment>
             <CourseInfos
+              data-testid="course-infos"
               data={courseData}
               reload={() => {
                 this.loadCourseInfos(courseId);
                 this.loadNextLesson(courseId);
               }}
             />
-            {lessonData && <NextLessonDisplay data={lessonData} />}
-            {!lessonData && !lessonError && <Spinner />}
+            {lessonData && (
+              <NextLessonDisplay data-testid="next-lesson" data={lessonData} />
+            )}
+            {!lessonData &&
+              !lessonError && <Spinner data-testid="next-lesson-spinner" />}
             {lessonError && (
               <ErrorRetry
+                data-testid="next-lesson-error"
                 which="next lesson"
                 retryCallback={() => this.loadNextLesson(courseId)}
               />
             )}
           </Fragment>
         )}
-        {!courseData && !courseError && <Spinner />}
+        {!courseData &&
+          !courseError && <Spinner data-testid="course-infos-spinner" />}
         {courseError && (
           <ErrorRetry
+            data-testid="course-infos-error"
             which="course"
             retryCallback={() => this.loadCourseInfos(courseId)}
           />

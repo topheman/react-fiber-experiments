@@ -67,6 +67,7 @@ class CoursesList extends Component {
             return (
               <li key={course.id}>
                 <Link
+                  data-testid={`link-to-course-${course.id}`}
                   to={`course/${course.id}`}
                   onClick={event => {
                     this.setState({

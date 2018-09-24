@@ -3,5 +3,5 @@
   "video": false,
   "chromeWebSecurity": false,
   "projectId": "1ru71n",
-  "testFiles": "**/index.spec.js"
+  "defaultCommandTimeout": 12000
 }

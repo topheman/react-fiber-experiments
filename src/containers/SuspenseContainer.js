@@ -29,7 +29,9 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
           </span>
         </Link>
         {" > "}
-        <Link to="../../..">Suspense</Link>
+        <Link to="../../.." data-testid="link-to-suspense">
+          Suspense
+        </Link>
         {" > "}
         {waitingMode ? (
           <Link to="./">
@@ -37,7 +39,7 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
           </Link>
         ) : (
           <Fragment>
-            <Link to="./">
+            <Link to="./" data-testid="link-to-async-rendering">
               <strong>Async</strong> rendering
             </Link>{" "}
             (experimental APIs)
@@ -49,10 +51,12 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
       </p>
       <h2>{waitingMode ? "Waiting Mode" : "Async rendering"}</h2>
       <NetworkSlider
+        data-testid="network-slider"
         render={({ networkMode }) => {
           const explainResetCache = (
             <p>
               <span
+                data-testid="cache-refresh-button"
                 onClick={() => cache.invalidate()}
                 role="button"
                 tabIndex={0}

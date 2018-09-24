@@ -42,9 +42,12 @@ const Course = ({ courseId, delayMs, ...remainingProps }) => {
   const courseData = CourseResource.read(cache, courseId);
   return courseData && !courseData.error ? (
     <div {...remainingProps}>
-      <CourseInfos data={courseData} />
-      <Placeholder delayMs={parseInt(delayMs, 10)} fallback={<Spinner />}>
-        <NextLesson courseId={courseId} />
+      <CourseInfos data-testid="course-infos" data={courseData} />
+      <Placeholder
+        delayMs={parseInt(delayMs, 10)}
+        fallback={<Spinner data-testid="next-lesson-spinner" />}
+      >
+        <NextLesson data-testid="next-lesson" courseId={courseId} />
       </Placeholder>
       <div>
         <Link to={`../../../../../regular-rendering/course/${courseId}`}>
@@ -54,7 +57,7 @@ const Course = ({ courseId, delayMs, ...remainingProps }) => {
       </div>
     </div>
   ) : (
-    <ErrorRetry which="course" />
+    <ErrorRetry data-testid="course-infos-error" which="course" />
   );
 };
 Course.propTypes = {
@@ -67,7 +70,7 @@ const NextLesson = ({ courseId, ...remainingProps }) => {
   return lessonData && !lessonData.error ? (
     <NextLessonDisplay data={lessonData} {...remainingProps} />
   ) : (
-    <ErrorRetry which="next lesson" />
+    <ErrorRetry data-testid="next-lesson-error" which="next lesson" />
   );
 };
 NextLesson.propTypes = {
@@ -76,7 +79,10 @@ NextLesson.propTypes = {
 
 const SuspenseCoursesContainer = ({ courseId, delayMs }) => (
   <Fragment>
-    <Placeholder delayMs={parseInt(delayMs, 10)} fallback={<Spinner />}>
+    <Placeholder
+      delayMs={parseInt(delayMs, 10)}
+      fallback={<Spinner data-testid="course-infos-spinner" />}
+    >
       <Course courseId={courseId} delayMs={delayMs} />
     </Placeholder>
   </Fragment>

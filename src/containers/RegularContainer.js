@@ -26,9 +26,11 @@ const RegularContainer = ({ children, location }) => {
           </span>
         </Link>
         {" > "}
-        <Link to="..">Suspense</Link>
+        <Link to=".." data-testid="link-to-suspense">
+          Suspense
+        </Link>
         {" > "}
-        <Link to="./">
+        <Link to="./" data-testid="link-to-regular-rendering">
           <strong>Regular</strong> rendering
         </Link>{" "}
         (current APIs)
