@@ -1,16 +1,11 @@
 // This file is called on "precy:run" script
 console.log(`
-= Running all test files in the same spec ==========================================================
+= Running each test files in isolation ==========================================================
 
-Since cypress@3.x.x, each spec file runs in isolation. The tests took much longer to run.
+It takes more time, but it seems that when testing involves lots of timers,
+some tests fail some times.
 
-To speed them up, I decided to run all the files in the same spec.
+We want our tests to be deterministic.
 
-When creating a new spec file, update cypress/integration/index.spec.js, add your file.
-
-If you want to revert to the regular usage:
-- remove cypress/integration/index.spec.js
-- update cypress.json, remove the "testFiles" entry.
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────────────────────
 `);

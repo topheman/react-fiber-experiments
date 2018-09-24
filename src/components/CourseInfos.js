@@ -22,13 +22,24 @@ const CourseInfos = ({
 }) => (
   <div className={classNames(classes.root, className)} {...remainingProps}>
     <h2>
-      <Link to="../.." className={classes.backLink} title="Back">
+      <Link
+        to="../.."
+        className={classes.backLink}
+        title="Back"
+        data-testid="back-button"
+      >
         <span role="img" aria-label="previous">
           ⬅️
         </span>
       </Link>
       {reload ? (
-        <span onClick={reload} role="button" tabIndex={0} onKeyDown={() => {}}>
+        <span
+          onClick={reload}
+          role="button"
+          tabIndex={0}
+          onKeyDown={() => {}}
+          data-testid="reload-button"
+        >
           <span role="img" aria-label="reload" style={{ cursor: "pointer" }}>
             🔄
           </span>

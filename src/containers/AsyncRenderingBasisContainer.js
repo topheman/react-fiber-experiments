@@ -24,14 +24,17 @@ const ThrottledResource = createResource(
 
 const Delay = ({ duration }) => {
   const data = ThrottledResource.read(cache, duration);
-  return <p>{data}</p>;
+  return <p data-testid="delay-result">{data}</p>;
 };
 Delay.propTypes = {
   duration: PropTypes.string.isRequired
 };
 
 export const DelayContainer = ({ delayMs, ...remainingProps }) => (
-  <Placeholder delayMs={parseInt(delayMs, 10)} fallback={<Spinner />}>
+  <Placeholder
+    delayMs={parseInt(delayMs, 10)}
+    fallback={<Spinner data-testid="delay-spinner" />}
+  >
     <Delay delayMs={delayMs} {...remainingProps} />
   </Placeholder>
 );
@@ -80,6 +83,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
     <pre data-testid="placeholder-preview">{`<Placeholder delayMs={${delayMs}} fallback={<Spinner />}>`}</pre>
     <p>
       <span
+        data-testid="cache-refresh-button"
         onClick={() => cache.invalidate()}
         role="button"
         tabIndex={0}

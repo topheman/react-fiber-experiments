@@ -16,7 +16,18 @@ Cypress.Commands.add("slideNetworkSlider", mode => {
     );
   }
   const { x, y } = coordinates[mode];
-  return cy.getByTestId("network-slider").click(x, y);
+  return cy
+    .getByTestId("network-slider")
+    .click(x, y)
+    .then(el => {
+      if (localStorage.getItem("fake-api-network-mode") !== mode) {
+        console.warn(
+          "Network slider didn't save network mode in localStorage - glitch in Cypress ... patching ..."
+        );
+        localStorage.setItem("fake-api-network-mode", mode);
+      }
+      return el;
+    });
 });
 Cypress.Commands.add("slidePlaceholderSlider", (value, maxValue = 10000) =>
   cy.getByTestId("placeholder-slider").slideMaterialUiSlider(value, maxValue)

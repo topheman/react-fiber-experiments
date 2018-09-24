@@ -101,6 +101,7 @@ class DurationList extends Component {
             return (
               <li key={duration}>
                 <Link
+                  data-testid={`link-to-duration-${duration}`}
                   to={`./duration/${duration}`}
                   onClick={event => {
                     this.setState({

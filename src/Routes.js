@@ -27,7 +27,15 @@ const RegularCoursesContainer = loadable(
       const delay = getNetworkDelay("/scripts/course-container");
       return new Promise(resolve => setTimeout(() => resolve(script), delay));
     }),
-  { LoadingComponent: () => <Spinner style={{ color: "blue" }} size={75} /> }
+  {
+    LoadingComponent: () => (
+      <Spinner
+        style={{ color: "blue" }}
+        size={75}
+        data-testid="lazyload-spinner"
+      />
+    )
+  }
 );
 
 /**
@@ -50,7 +58,13 @@ const SuspenseCourseContainerPromise = lazy(() =>
 const LazySuspenseCoursesContainer = props => (
   <Placeholder
     delayMs={parseInt(props.delayMs, 10)}
-    fallback={<Spinner style={{ color: "blue" }} size={75} />}
+    fallback={
+      <Spinner
+        style={{ color: "blue" }}
+        size={75}
+        data-testid="lazyload-spinner"
+      />
+    }
   >
     <SuspenseCourseContainerPromise {...props} />
   </Placeholder>
@@ -98,7 +112,7 @@ const Routes = () => (
         <LazySuspenseCoursesContainer path="/course/:courseId" />
       </SuspenseContainer>
       <AsyncRenderingBasisContainer path="suspense/placeholder/delayMs/:delayMs">
-        <DelayContainer path="/duration/:duration" />
+        <DelayContainer data-testid="delay-result" path="/duration/:duration" />
       </AsyncRenderingBasisContainer>
     </Router>
   </MainLayout>
