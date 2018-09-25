@@ -1,5 +1,7 @@
 # react-fiber-experiments
 
+[![Build Status](https://travis-ci.org/topheman/react-fiber-experiments.svg?branch=master)](https://travis-ci.org/topheman/react-fiber-experiments)
+[![Cypress](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/1ru71n/runs)
 [![Demo](https://img.shields.io/badge/demo-online-blue.svg)](https://react-fiber-experiments.surge.sh/)
 
 The goal of this project is to show you the very latest features of React that are still in development (such as _Suspense_).
