@@ -77,6 +77,31 @@ On this project the end to end tests are not run on the precommit hook, they are
 
 Your code will be automatically linted / formatted when you commit. More infos on [topheman/my-react-app-starter](https://github.com/topheman/my-react-app-starter#linter)
 
+## Continuous Integration (CI)
+
+Each `git push` triggers a test suite on [travis](https://travis-ci.org/topheman/react-fiber-experiments). The following will be ran:
+
+- linting
+- unit tests
+- end to end test with cypress
+
+The end to end test sessions are recorded, you can check them [here](https://dashboard.cypress.io/#/projects/1ru71n/runs).
+
+## Continuous deployment (CD)
+
+### Staging
+
+On each commit (or PR) pushed to `master`, if the tests are passing, a version of the website will be automatically deployed from travis to a staging server: https://staging-react-fiber-experiments.surge.sh (that way, your QA team will be able to test your latest stable features before you release them)
+
+### Production
+
+On each tag pushed to `master`:
+
+- a new version will be deployed to the production server: https://react-fiber-experiments.surge.sh
+- the artefacts generated during build (the `build` folder) will be uploaded to the related release, so that you could re-download them at any time (see [releases](https://github.com/topheman/react-fiber-experiments/releases) section)
+
+🚚 [More infos about Continuous Deployment](http://dev.topheman.com/continuous-deployment-with-travis-ci/)
+
 ## FAQ
 
 ### Which boilerplate was used

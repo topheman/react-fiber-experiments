@@ -7,3 +7,29 @@ script:
   - npm run lint
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run test:travis || npm run test:travis:pr'
   - npm run build
+before_deploy:
+  - tar czvf build.tar.gz -C build .
+deploy:
+  - provider: surge # Deploy to staging on each commit to master
+    project: ./build/
+    domain: staging-react-fiber-experiments.surge.sh
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: surge # Deploy to production on each tag to master
+    project: ./build/
+    domain: react-fiber-experiments.surge.sh
+    skip_cleanup: true
+    on:
+      tags: true
+      branch: master
+  - provider: releases # Upload build artefacts to github releases on each tag on master
+    api_key: $GITHUB_TOKEN
+    file: "./build.tar.gz"
+    skip_cleanup: true
+    on:
+      tags: true
+      branch: master
+after_deploy:
+  - curl staging-react-fiber-experiments.surge.sh
+  - curl react-fiber-experiments.surge.sh
