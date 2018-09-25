@@ -38,8 +38,6 @@
   "scripts": {
     "start": "react-app-rewired --require ./bin/expand-metadatas.js start",
     "build": "react-app-rewired --require ./bin/expand-metadatas.js build && cp build/index.html build/200.html",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "npm-run-all --parallel --silent test:unit test:cypress",
     "test:travis": "npm-run-all --parallel --silent test:unit test:cypress:travis",
     "test:travis:pr": "echo 'Travis PRs do not have access to env vars, run your tests according to that' && npm test",
@@ -77,7 +75,6 @@
     "eslint-plugin-cypress": "^2.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "generate-changelog": "^1.7.1",
-    "gh-pages": "^1.2.0",
     "git-rev-sync": "^1.12.0",
     "github-url-from-git": "^1.5.0",
     "husky": "^0.14.3",
