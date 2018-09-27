@@ -23,6 +23,8 @@ const styles = theme => ({
     flexGrow: 1
   },
   logo: {
+    width: 48,
+    height: 48,
     backgroundImage: `url(${reactLogo})`,
     backgroundSize: 68,
     backgroundPosition: "-10px 0px",
