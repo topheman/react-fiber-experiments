@@ -58,7 +58,6 @@
     "lint": "npx eslint .",
     "generate-changelog": "./bin/generate-changelog.js",
     "pretty": "npx prettier --write '**/*.{js,jsx,json,css,scss}'",
-    "precommit": "lint-staged && npm run lint && npm run test:precommit",
     "serve": "npx serve --no-clipboard --single --listen 5000 build"
   },
   "devDependencies": {
@@ -78,7 +77,7 @@
     "generate-changelog": "^1.7.1",
     "git-rev-sync": "^1.12.0",
     "github-url-from-git": "^1.5.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.1",
     "jest-dom": "^1.12.1",
     "lint-staged": "^7.3.0",
     "moment": "^2.22.2",
@@ -95,6 +94,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run lint && npm run test:precommit"
+    }
   },
   "homepage": "/"
 }
