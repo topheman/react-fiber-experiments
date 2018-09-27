@@ -33,3 +33,5 @@ cp -a /path/to/react/build/node_modules/* /path/to/react-fiber-experiments/react
 ## Note
 
 The modules in `react-modules` are aliased, thanks to `react-app-rewired` with which I overrode `config.resolve`.
+
+Please update the [`infos.json`](./infos.json) file with the exact hash of the git revision you used to make your React custom build.

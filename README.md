@@ -75,6 +75,8 @@ I'm using [cypress.io](https://www.cypress.io/) for the e2e tests. You will find
 
 On this project the end to end tests are not run on the precommit hook, they are run on the CI to gain time (take a few seconds before pushing to run them).
 
+Cypress is launch with: `cross-env CYPRESS_TRAVIS=$TRAVIS cypress run` - that way, it is possible in your cypress tests to detect whether you're on CI or not with `Cypress.env("TRAVIS")`. [More infos about cypress managing env vars](https://docs.cypress.io/guides/guides/environment-variables.html#Option-3-CYPRESS).
+
 ## Linter / Prettier
 
 Your code will be automatically linted / formatted when you commit. More infos on [topheman/my-react-app-starter](https://github.com/topheman/my-react-app-starter#linter)

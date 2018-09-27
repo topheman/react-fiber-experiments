@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-modules-infos result should match snapshot 1`] = `
+Object {
+  "react": Object {
+    "description": "React is a JavaScript library for building user interfaces.",
+    "version": "16.5.0",
+  },
+  "react-dom": Object {
+    "description": "React package for working with the DOM.",
+    "version": "16.5.0",
+  },
+  "schedule": Object {
+    "description": "Cooperative scheduler for the browser environment.",
+    "version": "0.3.0",
+  },
+  "simple-cache-provider": Object {
+    "description": "A basic cache for React applications",
+    "version": "0.8.0",
+  },
+}
+`;
