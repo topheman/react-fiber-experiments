@@ -36,7 +36,9 @@
     "route-parser": "0.0.5"
   },
   "scripts": {
+    "prestart": "npm run clear:babel-cache",
     "start": "react-app-rewired --require ./bin/expand-metadatas.js start",
+    "prebuild": "npm run clear:babel-cache",
     "build": "react-app-rewired --require ./bin/expand-metadatas.js build && cp build/index.html build/200.html",
     "test": "npm-run-all --parallel --silent test:unit test:cypress",
     "test:travis": "npm-run-all --parallel --silent test:unit test:cypress:travis",
@@ -56,6 +58,7 @@
     "test:precommit": "npm run test:unit",
     "eject": "react-scripts eject",
     "lint": "npx eslint .",
+    "clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*",
     "generate-changelog": "./bin/generate-changelog.js",
     "pretty": "npx prettier --write '**/*.{js,jsx,json,css,scss}'",
     "serve": "npx serve --no-clipboard --single --listen 5000 build"
@@ -86,6 +89,7 @@
     "preval.macro": "^3.0.0",
     "react-app-rewired": "^1.6.2",
     "react-testing-library": "^5.1.0",
+    "rimraf": "^2.6.2",
     "serve": "^10.0.2",
     "start-server-and-test": "^1.7.1"
   },
