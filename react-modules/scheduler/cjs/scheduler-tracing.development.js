@@ -1,5 +1,5 @@
-/** @license React v16.5.0
- * schedule-tracking.development.js
+/** @license React v16.5.2
+ * scheduler-tracing.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -16,24 +16,6 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-{
-  
-}
-
-// Relying on the `invariant()` implementation lets us
-// preserve the format and params in the www builds.
 
 // Exports ReactDOM.createRoot
 
@@ -65,13 +47,17 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // Gather advanced timing metrics for Profiler subtrees.
 
 
-// Track which interactions trigger each commit.
-var enableSchedulerTracking = true;
+// Trace which interactions trigger each commit.
+var enableSchedulerTracing = true;
 
 // Only used in www builds.
 
 
 // Only used in www builds.
+
+
+// React Fire: prevent the value and checked attributes from syncing
+// with their related DOM properties
 
 var DEFAULT_THREAD_ID = 0;
 
@@ -79,16 +65,16 @@ var DEFAULT_THREAD_ID = 0;
 var interactionIDCounter = 0;
 var threadIDCounter = 0;
 
-// Set of currently tracked interactions.
+// Set of currently traced interactions.
 // Interactions "stack"–
-// Meaning that newly tracked interactions are appended to the previously active set.
+// Meaning that newly traced interactions are appended to the previously active set.
 // When an interaction goes out of scope, the previous set (if any) is restored.
 exports.__interactionsRef = null;
 
 // Listener(s) to notify when interactions begin and end.
 exports.__subscriberRef = null;
 
-if (enableSchedulerTracking) {
+if (enableSchedulerTracing) {
   exports.__interactionsRef = {
     current: new Set()
   };
@@ -98,7 +84,7 @@ if (enableSchedulerTracking) {
 }
 
 function unstable_clear(callback) {
-  if (!enableSchedulerTracking) {
+  if (!enableSchedulerTracing) {
     return callback();
   }
 
@@ -113,7 +99,7 @@ function unstable_clear(callback) {
 }
 
 function unstable_getCurrent() {
-  if (!enableSchedulerTracking) {
+  if (!enableSchedulerTracing) {
     return null;
   } else {
     return exports.__interactionsRef.current;
@@ -124,10 +110,10 @@ function unstable_getThreadID() {
   return ++threadIDCounter;
 }
 
-function unstable_track(name, timestamp, callback) {
+function unstable_trace(name, timestamp, callback) {
   var threadID = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : DEFAULT_THREAD_ID;
 
-  if (!enableSchedulerTracking) {
+  if (!enableSchedulerTracing) {
     return callback();
   }
 
@@ -140,7 +126,7 @@ function unstable_track(name, timestamp, callback) {
 
   var prevInteractions = exports.__interactionsRef.current;
 
-  // Tracked interactions should stack/accumulate.
+  // Traced interactions should stack/accumulate.
   // To do that, clone the current interactions.
   // The previous set will be restored upon completion.
   var interactions = new Set(prevInteractions);
@@ -152,7 +138,7 @@ function unstable_track(name, timestamp, callback) {
 
   try {
     if (subscriber !== null) {
-      subscriber.onInteractionTracked(interaction);
+      subscriber.onInteractionTraced(interaction);
     }
   } finally {
     try {
@@ -188,7 +174,7 @@ function unstable_track(name, timestamp, callback) {
 function unstable_wrap(callback) {
   var threadID = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_THREAD_ID;
 
-  if (!enableSchedulerTracking) {
+  if (!enableSchedulerTracing) {
     return callback;
   }
 
@@ -279,18 +265,18 @@ function unstable_wrap(callback) {
 }
 
 var subscribers = null;
-if (enableSchedulerTracking) {
+if (enableSchedulerTracing) {
   subscribers = new Set();
 }
 
 function unstable_subscribe(subscriber) {
-  if (enableSchedulerTracking) {
+  if (enableSchedulerTracing) {
     subscribers.add(subscriber);
 
     if (subscribers.size === 1) {
       exports.__subscriberRef.current = {
         onInteractionScheduledWorkCompleted: onInteractionScheduledWorkCompleted,
-        onInteractionTracked: onInteractionTracked,
+        onInteractionTraced: onInteractionTraced,
         onWorkCanceled: onWorkCanceled,
         onWorkScheduled: onWorkScheduled,
         onWorkStarted: onWorkStarted,
@@ -301,7 +287,7 @@ function unstable_subscribe(subscriber) {
 }
 
 function unstable_unsubscribe(subscriber) {
-  if (enableSchedulerTracking) {
+  if (enableSchedulerTracing) {
     subscribers.delete(subscriber);
 
     if (subscribers.size === 0) {
@@ -310,13 +296,13 @@ function unstable_unsubscribe(subscriber) {
   }
 }
 
-function onInteractionTracked(interaction) {
+function onInteractionTraced(interaction) {
   var didCatchError = false;
   var caughtError = null;
 
   subscribers.forEach(function (subscriber) {
     try {
-      subscriber.onInteractionTracked(interaction);
+      subscriber.onInteractionTraced(interaction);
     } catch (error) {
       if (!didCatchError) {
         didCatchError = true;
@@ -433,7 +419,7 @@ function onWorkCanceled(interactions, threadID) {
 exports.unstable_clear = unstable_clear;
 exports.unstable_getCurrent = unstable_getCurrent;
 exports.unstable_getThreadID = unstable_getThreadID;
-exports.unstable_track = unstable_track;
+exports.unstable_trace = unstable_trace;
 exports.unstable_wrap = unstable_wrap;
 exports.unstable_subscribe = unstable_subscribe;
 exports.unstable_unsubscribe = unstable_unsubscribe;

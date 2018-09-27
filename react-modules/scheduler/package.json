@@ -1,6 +1,6 @@
 {
-  "name": "schedule",
-  "version": "0.3.0",
+  "name": "scheduler",
+  "version": "0.9.0",
   "description": "Cooperative scheduler for the browser environment.",
   "main": "index.js",
   "repository": "facebook/react",
@@ -19,7 +19,8 @@
     "LICENSE",
     "README.md",
     "index.js",
-    "tracking.js",
+    "tracing.js",
+    "tracing-profiling.js",
     "cjs/",
     "umd/"
   ]
