@@ -1,6 +1,6 @@
 {
   "name": "react-fiber-experiments",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "description": "Discover React Fiber's new features like Suspense",
   "keywords": [
