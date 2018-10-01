@@ -6,6 +6,10 @@ Object {
     "description": "React is a JavaScript library for building user interfaces.",
     "version": "16.5.2",
   },
+  "react-cache": Object {
+    "description": "A basic cache for React applications",
+    "version": "2.0.0-alpha.0",
+  },
   "react-dom": Object {
     "description": "React package for working with the DOM.",
     "version": "16.5.2",
@@ -13,10 +17,6 @@ Object {
   "scheduler": Object {
     "description": "Cooperative scheduler for the browser environment.",
     "version": "0.9.0",
-  },
-  "simple-cache-provider": Object {
-    "description": "A basic cache for React applications",
-    "version": "0.10.0",
   },
 }
 `;

@@ -20,9 +20,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // Exports ReactDOM.createRoot
 
 
-// Experimental error-boundary API that can recover from errors within a single
-// render phase
-
 // Suspense
 
 // Helps identify side effects in begin-phase lifecycle hooks and setState reducers:

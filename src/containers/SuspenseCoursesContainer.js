@@ -1,6 +1,6 @@
 import React, { Fragment, Placeholder } from "react";
 import PropTypes from "prop-types";
-import { createResource } from "simple-cache-provider"; // eslint-disable-line
+import { createResource } from "react-cache"; // eslint-disable-line
 import { Link } from "@reach/router";
 
 import { cache } from "../cache";
@@ -20,7 +20,7 @@ import Spinner from "../components/Spinner";
 /**
  * Network failure handling - I've tried:
  * - ErrorBoundaries: The first error thrown by the api promise is catched but the ones
- * thrown after by simple-cache-provider due to cache miss after trying to remount the node
+ * thrown after by react-cache due to cache miss after trying to remount the node
  * finally bring down the app.
  *
  * For the moment, when I createResource, I return a function that swallows its own errors

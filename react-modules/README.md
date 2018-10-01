@@ -21,7 +21,7 @@ Then build the packages:
 ```shell
 cd /path/to/react
 yarn
-yarn build dom-client,core,simple-cache-provider,schedule --type=NODE
+yarn build dom-client,core,react-cache,schedule --type=NODE
 ```
 
 ### Copy the packages to your project

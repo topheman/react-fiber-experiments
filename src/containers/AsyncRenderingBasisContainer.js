@@ -1,7 +1,7 @@
 import React, { Placeholder } from "react";
 import PropTypes from "prop-types";
 import { Link, navigate } from "@reach/router";
-import { createResource } from "simple-cache-provider"; // eslint-disable-line
+import { createResource } from "react-cache"; // eslint-disable-line
 import { Slider } from "@material-ui/lab";
 
 import { cache } from "../cache";

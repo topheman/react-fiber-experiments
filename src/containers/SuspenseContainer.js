@@ -67,7 +67,7 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
                   🔄
                 </span>
                 <strong>Reset cache</strong> (invalidate cache from{" "}
-                <code>simple-cache-provider</code>)
+                <code>react-cache</code>)
               </span>
             </p>
           );

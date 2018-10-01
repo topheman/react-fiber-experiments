@@ -1,5 +1,5 @@
 /** @license React v16.5.2
- * simple-cache-provider.development.js
+ * react-cache.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -350,10 +350,10 @@ function createResource(loadResource, hash) {
 
 // Global cache has no eviction policy (except for, ya know, a browser refresh).
 var globalCache = createCache(noop);
-var SimpleCache = React.createContext(globalCache);
+var ReactCache = React.createContext(globalCache);
 
 exports.createCache = createCache;
 exports.createResource = createResource;
-exports.SimpleCache = SimpleCache;
+exports.ReactCache = ReactCache;
   })();
 }

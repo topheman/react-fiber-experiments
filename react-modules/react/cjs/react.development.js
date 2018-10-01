@@ -36,6 +36,7 @@ var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace;
 var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
 var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
 var REACT_PLACEHOLDER_TYPE = hasSymbol ? Symbol.for('react.placeholder') : 0xead1;
+var REACT_PURE_TYPE = hasSymbol ? Symbol.for('react.pure') : 0xead3;
 
 var MAYBE_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL = '@@iterator';
@@ -53,9 +54,6 @@ function getIteratorFn(maybeIterable) {
 
 // Exports ReactDOM.createRoot
 
-
-// Experimental error-boundary API that can recover from errors within a single
-// render phase
 
 // Suspense
 var enableSuspense = true;
@@ -1385,10 +1383,28 @@ function forwardRef(render) {
   };
 }
 
+function pure(render, compare) {
+  {
+    if (typeof render !== 'function') {
+      warningWithoutStack$1(false, 'pure: The first argument must be a functional component. Instead ' + 'received: %s', render === null ? 'null' : typeof render);
+    } else {
+      var prototype = render.prototype;
+      if (prototype && prototype.isReactComponent) {
+        warningWithoutStack$1(false, 'pure: The first argument must be a functional component. Classes ' + 'are not supported. Use React.PureComponent instead.');
+      }
+    }
+  }
+  return {
+    $$typeof: REACT_PURE_TYPE,
+    render: render,
+    compare: compare === undefined ? null : compare
+  };
+}
+
 function isValidElementType(type) {
   return typeof type === 'string' || typeof type === 'function' ||
   // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_PLACEHOLDER_TYPE || typeof type === 'object' && type !== null && (typeof type.then === 'function' || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_PLACEHOLDER_TYPE || typeof type === 'object' && type !== null && (typeof type.then === 'function' || type.$$typeof === REACT_PURE_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
 }
 
 /**
@@ -1688,6 +1704,7 @@ var React = {
 
   createContext: createContext,
   forwardRef: forwardRef,
+  pure: pure,
 
   Fragment: REACT_FRAGMENT_TYPE,
   StrictMode: REACT_STRICT_MODE_TYPE,
