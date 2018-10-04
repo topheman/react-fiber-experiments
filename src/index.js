@@ -6,7 +6,7 @@ import { initCache } from "./cache";
 
 import "./index.css";
 import RootContainer from "./containers/RootContainer";
-import registerServiceWorker from "./registerServiceWorker";
+import { unregister } from "./registerServiceWorker";
 
 import { initFakeApi } from "./libs/fake-api";
 
@@ -57,7 +57,7 @@ initCache();
 initFakeApi();
 
 render(RootContainer);
-registerServiceWorker();
+unregister();
 
 if (module.hot) {
   module.hot.accept("./containers/RootContainer", () => {
