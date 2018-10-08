@@ -8,7 +8,9 @@ The goal of this project is to show you the very latest features of React that a
 
 You can [try online the demo](https://react-fiber-experiments.surge.sh/) to understand the benefits of those new features and take a look at the source code to better understand those new concepts.
 
-💯 📺 _[Watch the podcast on this project, presenting React Suspense](http://dev.topheman.com/discover-react-suspense/)_
+💯 📺 _[Watch the screencast on this project, presenting React Suspense](http://dev.topheman.com/discover-react-suspense/)_
+
+💯 📺 _[Watch the talk on this project, presenting React Suspense](http://dev.topheman.com/decouvrir-react-suspense-video-talk-fr/) (french)_ 🇫🇷
 
 📺 _[Watch a recording of end to end tests with Cypress](https://youtu.be/BRxr9IhN1ww)_
 

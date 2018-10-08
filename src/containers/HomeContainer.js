@@ -3,27 +3,7 @@ import { Link } from "@reach/router";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core";
 
-const styles = {
-  videoContainer: {
-    position: "relative",
-    paddingBottom: "56.25%",
-    paddingTop: "30px",
-    height: 0,
-    overflow: "hidden",
-    "& iframe, & object, & embed": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%"
-    }
-  },
-  videoWrapper: {
-    width: 450,
-    maxWidth: "100%",
-    margin: "0 auto"
-  }
-};
+import sharedStyles from "../sharedStyles";
 
 export const SuspenseExplanation = ({ header }) => (
   <Fragment>
@@ -99,6 +79,10 @@ const HomeContainer = ({ classes }) => (
         />
       </div>
     </div>
+    <p className={classes.videoDescription}>
+      <strong>Watch screencast [en]</strong> /{" "}
+      <Link to="/about">Watch talk [fr]</Link>
+    </p>
     <SuspenseExplanation />
   </div>
 );
@@ -106,4 +90,4 @@ HomeContainer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(HomeContainer);
+export default withStyles(sharedStyles)(HomeContainer);
