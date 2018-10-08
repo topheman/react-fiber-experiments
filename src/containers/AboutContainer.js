@@ -4,6 +4,8 @@ import { Link } from "@reach/router";
 import { withStyles } from "@material-ui/core";
 import preval from "preval.macro";
 
+import sharedStyles from "../sharedStyles";
+
 // the following uses preval.macro which will be executed at build time
 
 const hash = preval`
@@ -18,6 +20,7 @@ const facebookReactRepoCommit = `https://github.com/facebook/react/commit/${hash
 // it would have been too much for this case and caused more indirection
 
 const styles = {
+  ...sharedStyles,
   reactModuleInfos: {
     fontSize: "85%"
   },
@@ -38,7 +41,23 @@ const AboutContainer = ({ classes }) => (
       {" > "}
       <strong>About</strong>
     </p>
-    <h2>About</h2>
+    <div className={classes.videoWrapper}>
+      <div className={classes.videoContainer}>
+        <iframe
+          title="Découvrir React Suspense"
+          src="https://www.youtube.com/embed/GlBhj1ee1wk"
+          width="560"
+          height="315"
+          frameBorder="0"
+          allowFullScreen="allowfullscreen"
+        />
+      </div>
+    </div>
+    <p className={classes.videoDescription}>
+      <Link to="/">Watch screencast [en]</Link> /{" "}
+      <strong>Watch talk [fr]</strong>
+    </p>
+    <h3>Resources</h3>
     <ul>
       <li>
         <span role="img" aria-label="post">
