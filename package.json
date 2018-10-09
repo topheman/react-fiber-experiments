@@ -52,7 +52,8 @@
     "cy:open": "cypress open",
     "precy:run": "node cypress/support/precyrun.js",
     "cy:run": "cross-env CYPRESS_TRAVIS=$TRAVIS cypress run",
-    "cy:run:travis": "npm run cy:run -- --record --config video=true",
+    "precy:run:travis": "node ./bin/precyruntravis.js",
+    "cy:run:travis": "npm run cy:run -- --record",
     "cy:start-server-and-test": "npx start-server-and-test serve :5000 cy:run",
     "cy:start-server-and-test:travis": "npx start-server-and-test serve :5000 cy:run:travis",
     "test:precommit": "npm run test:unit",
@@ -66,6 +67,7 @@
   "devDependencies": {
     "babel-plugin-macros": "^2.4.2",
     "babel-polyfill": "^6.26.0",
+    "chalk": "^2.4.1",
     "commander": "^2.18.0",
     "cross-env": "^5.2.0",
     "cypress": "^3.1.0",
