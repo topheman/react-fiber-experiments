@@ -2,8 +2,6 @@ import React from "react";
 import { unstable_createRoot } from "react-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import { initCache } from "./cache";
-
 import "./index.css";
 import RootContainer from "./containers/RootContainer";
 import { unregister } from "./registerServiceWorker";
@@ -53,7 +51,6 @@ const render = Component => {
 
 // You may init any API service here
 
-initCache();
 initFakeApi();
 
 render(RootContainer);

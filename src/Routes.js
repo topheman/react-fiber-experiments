@@ -1,4 +1,4 @@
-import React, { lazy, Placeholder } from "react";
+import React, { lazy, Suspense } from "react";
 import { Router, Redirect } from "@reach/router";
 import loadable from "loadable-components";
 import PropTypes from "prop-types";
@@ -25,7 +25,9 @@ const RegularCoursesContainer = loadable(
   () =>
     import("./containers/RegularCoursesContainer").then(script => {
       const delay = getNetworkDelay("/scripts/course-container");
-      return new Promise(resolve => setTimeout(() => resolve(script), delay));
+      return new Promise(resolve =>
+        setTimeout(() => resolve(script.default), delay)
+      );
     }),
   {
     LoadingComponent: () => (
@@ -56,8 +58,8 @@ const SuspenseCourseContainerPromise = lazy(() =>
   )
 );
 const LazySuspenseCoursesContainer = props => (
-  <Placeholder
-    delayMs={parseInt(props.delayMs, 10)}
+  <Suspense
+    maxDuration={parseInt(props.delayMs, 10)}
     fallback={
       <Spinner
         style={{ color: "blue" }}
@@ -67,7 +69,7 @@ const LazySuspenseCoursesContainer = props => (
     }
   >
     <SuspenseCourseContainerPromise {...props} />
-  </Placeholder>
+  </Suspense>
 );
 LazySuspenseCoursesContainer.propTypes = {
   delayMs: PropTypes.string

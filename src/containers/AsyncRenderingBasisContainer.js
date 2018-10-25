@@ -1,10 +1,9 @@
-import React, { Placeholder } from "react";
+import React, { Suspense } from "react";
 import PropTypes from "prop-types";
 import { Link, navigate } from "@reach/router";
-import { createResource } from "react-cache"; // eslint-disable-line
+import { unstable_createResource as createResource } from "react-cache"; // eslint-disable-line
 import { Slider } from "@material-ui/lab";
 
-import { cache } from "../cache";
 import Spinner from "../components/Spinner";
 import DurationList from "../components/DurationList";
 import ViewSourceLink from "../components/ViewSourceLink";
@@ -23,7 +22,7 @@ const ThrottledResource = createResource(
 );
 
 const Delay = ({ duration }) => {
-  const data = ThrottledResource.read(cache, duration);
+  const data = ThrottledResource.read(duration);
   return <p data-testid="delay-result">{data}</p>;
 };
 Delay.propTypes = {
@@ -31,12 +30,12 @@ Delay.propTypes = {
 };
 
 export const DelayContainer = ({ delayMs, ...remainingProps }) => (
-  <Placeholder
-    delayMs={parseInt(delayMs, 10)}
+  <Suspense
+    maxDuration={parseInt(delayMs, 10)}
     fallback={<Spinner data-testid="delay-spinner" />}
   >
-    <Delay delayMs={delayMs} {...remainingProps} />
-  </Placeholder>
+    <Delay maxDuration={delayMs} {...remainingProps} />
+  </Suspense>
 );
 DelayContainer.propTypes = {
   delayMs: PropTypes.string
@@ -62,7 +61,7 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
     <h2>Async Rendering Basis</h2>
     <p>
       To understand the basics of <strong>render pausing</strong> with reading
-      from cache and Placeholder delayMs / fallback attributes:
+      from cache and Suspense delayMs / fallback attributes:
     </p>
     <ul>
       <li>
@@ -80,11 +79,15 @@ const AsyncRenderingBasisContainer = ({ children, delayMs }) => (
         navigate(`/suspense/placeholder/delayMs/${value}`)
       }
     />
-    <pre data-testid="placeholder-preview">{`<Placeholder delayMs={${delayMs}} fallback={<Spinner />}>`}</pre>
+    <pre data-testid="placeholder-preview">{`<Suspense maxDuration={${delayMs}} fallback={<Spinner />}>`}</pre>
     <p>
       <span
         data-testid="cache-refresh-button"
-        onClick={() => cache.invalidate()}
+        onClick={() =>
+          alert(
+            "No more cache invalidation - https://github.com/facebook/react/pull/13865"
+          )
+        }
         role="button"
         tabIndex={0}
         onKeyDown={() => {}}

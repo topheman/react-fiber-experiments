@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import PropTypes from "prop-types";
 
-import { cache } from "../cache";
 import CoursesList from "../components/CoursesList";
 
 /**
@@ -22,7 +21,7 @@ const SuspenseHomeContainer = ({ delayMs }) => {
             By wrapping the components with{" "}
             <code>
               {"<"}
-              Placeholder delayMs=
+              Suspense maxDuration=
               {"{"}
               {delayMs}
               {"}"} fallback=
@@ -34,7 +33,11 @@ const SuspenseHomeContainer = ({ delayMs }) => {
           <p>
             We also rely on in-memory caching (click on the button{" "}
             <span
-              onClick={() => cache.invalidate()}
+              onClick={() =>
+                alert(
+                  "No more cache invalidation - https://github.com/facebook/react/pull/13865"
+                )
+              }
               role="button"
               tabIndex={0}
               onKeyDown={() => {}}

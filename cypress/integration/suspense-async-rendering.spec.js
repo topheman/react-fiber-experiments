@@ -18,7 +18,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should show blue spinner on first load", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-react").click();
       cy.getByTestId("lazyload-spinner").should("be.visible");
       cy.get("[data-testid=lazyload-spinner]").should("not.exist");
@@ -28,7 +28,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should NOT show blue spinner on subsequent loads", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-nodejs").click();
       cy.get("[data-testid=lazyload-spinner]").should("not.exist");
       cy.url().should(
@@ -37,7 +37,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should show course infos red spinner", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-webpack").click();
       cy.getByTestId("course-infos-spinner").should("be.visible");
       cy.get("[data-testid=course-infos-spinner]").should("not.exist");
@@ -47,7 +47,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should show all results when loaded", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-docker").click();
       cy.get("[data-testid=course-infos]").should("be.visible");
       cy.get("[data-testid=next-lesson]").should("be.visible");
@@ -74,7 +74,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should NOT show blue spinner on first load", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-react").click();
       cy.get("[data-testid=lazyload-spinner]").should("not.exist");
       cy.url().should(
@@ -83,7 +83,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should NOT show ANY spinner on subsequent loads", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-nodejs").click();
       cy.get("[data-testid=lazyload-spinner]").should("not.exist");
       cy.get("[data-testid=course-infos-spinner]").should("not.exist");
@@ -93,7 +93,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should show all results when loaded", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-webpack").click();
       cy.get("[data-testid=course-infos]").should("be.visible");
       cy.get("[data-testid=next-lesson]").should("be.visible");
@@ -103,7 +103,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should change link's opacity when suspending", () => {
-      cy.getByTestId("cache-refresh-button").click({ force: true });
+      // cy.getByTestId("cache-refresh-button").click({ force: true });
       cy.getByTestId("link-to-course-docker").click();
       cy.getByTestId("link-to-course-docker").then(el => {
         const opacity = Cypress.$(el)
@@ -134,7 +134,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should NOT show blue spinner on first load", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-react").click();
       cy.get("[data-testid=lazyload-spinner]").should("not.exist");
       cy.url().should(
@@ -143,7 +143,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should ONLY show next lesson spinner", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-nodejs").click();
       cy.get("[data-testid=course-infos-spinner]").should("not.exist");
       cy.get("[data-testid=next-lesson-spinner]").should("be.visible");
@@ -154,7 +154,7 @@ describe("/suspense/async-rendering", () => {
       );
     });
     it("should show all results when loaded", () => {
-      cy.getByTestId("cache-refresh-button").click();
+      // cy.getByTestId("cache-refresh-button").click();
       cy.getByTestId("link-to-course-webpack").click();
       cy.get("[data-testid=course-infos]").should("be.visible");
       cy.get("[data-testid=next-lesson]").should("be.visible");
