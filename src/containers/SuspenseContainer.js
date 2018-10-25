@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 import NetworkSlider from "../components/NetworkSlider";
-import { cache } from "../cache";
 import { getNetworkDelay } from "../libs/fake-api";
 import ViewSourceLink from "../components/ViewSourceLink";
 
@@ -57,7 +56,11 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
             <p>
               <span
                 data-testid="cache-refresh-button"
-                onClick={() => cache.invalidate()}
+                onClick={() =>
+                  alert(
+                    "No more cache invalidation - https://github.com/facebook/react/pull/13865"
+                  )
+                }
                 role="button"
                 tabIndex={0}
                 onKeyDown={() => {}}
@@ -95,9 +98,9 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
                     Since <strong>@reach/router is suspense aware</strong>,
                     transition to next route is placed on hold for{" "}
                     <code>
-                      &lt;Placeholder{" "}
+                      &lt;Suspense{" "}
                       <strong>
-                        delayMs=
+                        maxDuration=
                         {"{"}
                         {getNetworkDelay("/courses/topic")}
                         {"}"}

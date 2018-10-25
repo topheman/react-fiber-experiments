@@ -1,9 +1,8 @@
-import React, { Fragment, Placeholder } from "react";
+import React, { Fragment, Suspense } from "react";
 import PropTypes from "prop-types";
-import { createResource } from "react-cache"; // eslint-disable-line
+import { unstable_createResource as createResource } from "react-cache"; // eslint-disable-line
 import { Link } from "@reach/router";
 
-import { cache } from "../cache";
 import { fakeApi } from "../libs/fake-api";
 
 import CourseInfos from "../components/CourseInfos";
@@ -13,7 +12,7 @@ import Spinner from "../components/Spinner";
 
 /**
  * Note: The delayMs prop you see flowing up to down comes from the router
- * That way, you can specify the delayMs of the Placeholders around the just
+ * That way, you can specify the delayMs of the Suspenses around the just
  * by changing a little param in the url
  */
 
@@ -38,17 +37,17 @@ const NextLessonResource = createResource(courseId =>
 );
 
 const Course = ({ courseId, delayMs, ...remainingProps }) => {
-  NextLessonResource.preload(cache, courseId); // avoid serial requests
-  const courseData = CourseResource.read(cache, courseId);
+  NextLessonResource.preload(courseId); // avoid serial requests
+  const courseData = CourseResource.read(courseId);
   return courseData && !courseData.error ? (
     <div {...remainingProps}>
       <CourseInfos data-testid="course-infos" data={courseData} />
-      <Placeholder
-        delayMs={parseInt(delayMs, 10)}
+      <Suspense
+        maxDuration={parseInt(delayMs, 10)}
         fallback={<Spinner data-testid="next-lesson-spinner" />}
       >
         <NextLesson data-testid="next-lesson" courseId={courseId} />
-      </Placeholder>
+      </Suspense>
       <div>
         <Link to={`../../../../../regular-rendering/course/${courseId}`}>
           Compare to regular rendering
@@ -66,7 +65,7 @@ Course.propTypes = {
 };
 
 const NextLesson = ({ courseId, ...remainingProps }) => {
-  const lessonData = NextLessonResource.read(cache, courseId);
+  const lessonData = NextLessonResource.read(courseId);
   return lessonData && !lessonData.error ? (
     <NextLessonDisplay data={lessonData} {...remainingProps} />
   ) : (
@@ -79,12 +78,12 @@ NextLesson.propTypes = {
 
 const SuspenseCoursesContainer = ({ courseId, delayMs }) => (
   <Fragment>
-    <Placeholder
-      delayMs={parseInt(delayMs, 10)}
+    <Suspense
+      maxDuration={parseInt(delayMs, 10)}
       fallback={<Spinner data-testid="course-infos-spinner" />}
     >
-      <Course courseId={courseId} delayMs={delayMs} />
-    </Placeholder>
+      <Course courseId={courseId} maxDuration={delayMs} />
+    </Suspense>
   </Fragment>
 );
 SuspenseCoursesContainer.propTypes = {

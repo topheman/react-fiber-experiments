@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 
 import { fakeApi } from "../libs/fake-api";
-import { cache } from "../cache";
 
 import CourseInfos from "../components/CourseInfos";
 import NextLessonDisplay from "../components/NextLessonDisplay";
@@ -129,7 +128,11 @@ class RegularCoursesContainer extends Component {
         <div>
           <Link
             to={`../../../async-rendering/delayMs/DEFAULT_DELAY_MS/course/${courseId}`}
-            onClick={() => cache.invalidate()}
+            onClick={() =>
+              alert(
+                "No more cache invalidation - https://github.com/facebook/react/pull/13865"
+              )
+            }
           >
             Compare to async rendering
           </Link>{" "}
