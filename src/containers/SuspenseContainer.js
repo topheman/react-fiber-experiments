@@ -1,17 +1,25 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
+import { withStateHandlers } from "recompose";
 
 import NetworkSlider from "../components/NetworkSlider";
 import { getNetworkDelay } from "../libs/fake-api";
 import ViewSourceLink from "../components/ViewSourceLink";
+import NoCacheModal from "../components/NoCacheModal";
 
 /**
  * This component is mounted by the router at `/regular`
  * It wrapps children described with `path` prop so they respond to router changes
  * In the header: a relative link! To go back to this component
  */
-const SuspenseContainer = ({ children, delayMs, location }) => {
+const SuspenseContainer = ({
+  children,
+  delayMs,
+  location,
+  toggleModal,
+  modalOpen
+}) => {
   const waitingMode = parseInt(delayMs, 10) >= 10000;
   const REGEXP_MATCH = /\/course(\/.*)?/;
   // const baseUrl = location.pathname.replace(REGEXP_MATCH, "");
@@ -21,6 +29,13 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
   }
   return (
     <div>
+      <NoCacheModal
+        open={modalOpen}
+        onClose={() => toggleModal(false)}
+        reload={() => {
+          window.location.href = `/suspense/async-rendering/delayMs/${delayMs}`;
+        }}
+      />
       <p>
         <Link to="/">
           <span role="img" aria-label="home">
@@ -53,14 +68,10 @@ const SuspenseContainer = ({ children, delayMs, location }) => {
         data-testid="network-slider"
         render={({ networkMode }) => {
           const explainResetCache = (
-            <p>
+            <p style={{ opacity: 0.3 }}>
               <span
                 data-testid="cache-refresh-button"
-                onClick={() =>
-                  alert(
-                    "No more cache invalidation - https://github.com/facebook/react/pull/13865"
-                  )
-                }
+                onClick={() => toggleModal(true)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={() => {}}
@@ -153,11 +164,18 @@ SuspenseContainer.propTypes = {
   // https://github.com/reach/router/blob/master/src/index.js#L223-L226
   location: PropTypes.object, // from the Router
   children: PropTypes.node.isRequired,
-  delayMs: PropTypes.string
+  delayMs: PropTypes.string,
+  toggleModal: PropTypes.func.isRequired,
+  modalOpen: PropTypes.bool.isRequired
 };
 SuspenseContainer.defaultProps = {
   location: undefined,
   delayMs: undefined
 };
 
-export default SuspenseContainer;
+export default withStateHandlers(
+  { modalOpen: false },
+  {
+    toggleModal: () => open => ({ modalOpen: open })
+  }
+)(SuspenseContainer);
