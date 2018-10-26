@@ -1,5 +1,5 @@
 import React from "react";
-import { unstable_createRoot } from "react-dom";
+import { createRoot } from "react-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import "./index.css";
@@ -45,7 +45,7 @@ const theme = createMuiTheme({
  * This is where you add the root providers (like react-redux Provider)
  */
 const render = Component => {
-  unstable_createRoot(document.getElementById("root")).render(
+  createRoot(document.getElementById("root")).render(
     <MuiThemeProvider theme={theme}>
       <Component />
     </MuiThemeProvider>

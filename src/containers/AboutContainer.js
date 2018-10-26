@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, version as reactVersion } from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
 import { withStyles } from "@material-ui/core";
@@ -89,13 +89,12 @@ const AboutContainer = ({ classes }) => (
       if you want to).
     </p>
     <p>
-      The following modules where built in <code>suspense</code> mode from{" "}
+      The following modules were built in <code>suspense</code> mode from{" "}
       <a href={facebookReactRepoCommit}>
         this commit in the facebook/react repo
       </a>
-      .
+      :
     </p>
-    <p>The following modules where built:</p>
     <ul>
       {Object.entries(reactModules).map(([name, { version, description }]) => (
         <li
@@ -107,6 +106,17 @@ const AboutContainer = ({ classes }) => (
           <span>{version}</span> - <span>{description}</span>
         </li>
       ))}
+    </ul>
+    <p>Version in use:</p>
+    <ul>
+      <li className={classes.reactModuleInfos}>
+        <span className={classes.reactModuleName}>react</span>@
+        <span>{reactVersion}</span>
+      </li>
+      <li className={classes.reactModuleInfos}>
+        <span className={classes.reactModuleName}>react-dom</span>@
+        <span>{reactVersion}</span>
+      </li>
     </ul>
   </Fragment>
 );
