@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, version as reactVersion } from "react";
 import { Link } from "@reach/router";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core";
@@ -90,6 +90,13 @@ const HomeContainer = ({ classes }) => (
     <SuspenseExplanation />
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
+        <p>
+          Now using{" "}
+          <strong>
+            react@
+            {reactVersion}
+          </strong>
+        </p>
         <p>
           <strong>react@16.6.0 update</strong>
         </p>
