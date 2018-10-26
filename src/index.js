@@ -59,8 +59,8 @@ initFakeApi();
 render(RootContainer);
 unregister();
 
-if (module.hot) {
-  module.hot.accept("./containers/RootContainer", () => {
-    render(RootContainer);
-  });
-}
+// if (module.hot) {
+//   module.hot.accept("./containers/RootContainer", () => {
+//     render(RootContainer);
+//   });
+// }
