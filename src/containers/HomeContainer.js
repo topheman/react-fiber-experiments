@@ -2,8 +2,28 @@ import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 import sharedStyles from "../sharedStyles";
+
+const styles = {
+  ...sharedStyles,
+  card: {
+    minWidth: 275,
+    maxWidth: "45rem",
+    padding: 0,
+    backgroundColor: "#00800036",
+    margin: "0 auto"
+  },
+  cardContent: {
+    "&:last-child": {
+      paddingBottom: 0
+    },
+    padding: 0,
+    paddingLeft: 15
+  }
+};
 
 export const SuspenseExplanation = ({ header }) => (
   <Fragment>
@@ -67,7 +87,41 @@ const HomeContainer = ({ classes }) => (
       , not only the <strong>code part</strong>, but also to highlight what we
       may <strong>benefit on the UI/UX part</strong>.
     </p>
-    <div className={classes.videoWrapper}>
+    <SuspenseExplanation />
+    <Card className={classes.card}>
+      <CardContent className={classes.cardContent}>
+        <p>
+          <strong>react@16.6.0 update</strong>
+        </p>
+        <ul>
+          <li>
+            <code>
+              {"<"}
+              Placeholder delayMs {"/>"}
+            </code>{" "}
+            renamed to{" "}
+            <code>
+              {"<"}
+              Suspense maxDuration {"/>"}
+            </code>{" "}
+            <a href="https://github.com/facebook/react/commit/8af6728c6f105d37f9c0006288a6d1ac3903dc71">
+              8af6728
+            </a>{" "}
+            <a href="https://github.com/facebook/react/commit/d75c69e0cf2a842adc47edab87ca5103411e6949">
+              d75c69e
+            </a>
+          </li>
+          <li>
+            Removed <code>cache</code> as argument to <code>read</code> from{" "}
+            <code>react-cache</code>{" "}
+            <a href="https://github.com/facebook/react/pull/13865">#13865</a>
+            <br />
+            No more direct cache invalidation for the moment
+          </li>
+        </ul>
+      </CardContent>
+    </Card>
+    <div className={classes.videoWrapper} style={{ marginTop: 20 }}>
       <div className={classes.videoContainer}>
         <iframe
           title="Discover React Suspense"
@@ -83,11 +137,10 @@ const HomeContainer = ({ classes }) => (
       <strong>Watch screencast [en]</strong> /{" "}
       <Link to="/about">Watch talk [fr]</Link>
     </p>
-    <SuspenseExplanation />
   </div>
 );
 HomeContainer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(sharedStyles)(HomeContainer);
+export default withStyles(styles)(HomeContainer);
