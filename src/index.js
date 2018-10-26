@@ -20,6 +20,9 @@ const theme = createMuiTheme({
       light: "#e5c9ca"
     }
   },
+  typography: {
+    useNextVariants: true
+  },
   overrides: {
     MuiListSubheader: {
       root: {
