@@ -118,13 +118,7 @@ Based on [topheman/npm-registry-browser](https://github.com/topheman/npm-registr
 
 **This remains an un-ejected create-react-app project, which means that you can:**
 
-- update `react-scripts`
-- customize or remove any of the features added
-
-The [original CRA guidelines are still available here](README.cra.md)
-**This remains an un-ejected create-react-app project, which means that you can:**
-
-- update `react-scripts`
+- update `react-scripts` (remain on `v1.x` - currently relying on `react-app-rewired`)
 - customize or remove any of the features added
 
 The [original CRA guidelines are still available here](README.cra.md)
